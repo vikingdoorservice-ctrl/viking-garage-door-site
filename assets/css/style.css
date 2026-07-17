@@ -151,12 +151,12 @@ h3 { font-size: 1.35rem; }
   inset: 0;
   background: linear-gradient(100deg, rgba(22,25,29,0.93) 0%, rgba(22,25,29,0.78) 45%, rgba(22,25,29,0.45) 100%);
 }
-.hero-inner { position: relative; padding: 92px 0; max-width: 780px; }
+.hero-inner { position: relative; padding: 92px 20px; max-width: 780px; }
 .hero h1 { color: #fff; }
 .hero p.sub { margin: 18px 0 28px; font-size: 1.18rem; color: rgba(247,245,241,0.92); max-width: 640px; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
 .hero-note { margin-top: 18px; font-size: 0.95rem; color: rgba(247,245,241,0.75); }
-.page-hero .hero-inner { padding: 64px 0; }
+.page-hero .hero-inner { padding: 64px 20px; }
 
 /* Trust bar */
 .trustbar { background: var(--orange); color: var(--coal); }
@@ -165,7 +165,7 @@ h3 { font-size: 1.35rem; }
   flex-wrap: wrap;
   gap: 10px 34px;
   justify-content: center;
-  padding: 13px 0;
+  padding: 13px 20px;
   font-family: var(--display);
   font-weight: 700;
   text-transform: uppercase;
@@ -405,7 +405,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--orange); bo
   .site-nav.open { display: flex; }
   .header-phone { display: none; }
   .grid-4, .grid-3, .grid-2, .form-grid { grid-template-columns: 1fr; }
-  .hero-inner { padding: 64px 0; }
+  .hero-inner { padding: 64px 20px; }
   .footer-grid { grid-template-columns: 1fr; }
   .section { padding: 54px 0; }
 }
