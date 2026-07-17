@@ -263,6 +263,7 @@ h3 { font-size: 1.35rem; }
   letter-spacing: 0.08em;
   font-weight: 600;
 }
+.price-table td { color: var(--ink); }
 .price-table tr:last-child td { border-bottom: 0; }
 .price-table td.price { font-weight: 700; white-space: nowrap; }
 

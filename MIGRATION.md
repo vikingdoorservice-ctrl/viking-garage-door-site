@@ -46,6 +46,7 @@ github.com/vikingdoorservice-ctrl/viking-garage-door-site → Settings → Pages
 4. В Wix: домен отключить от старого сайта (НЕ удалять сам сайт — пусть лежит как архив).
 5. Google Search Console (property vikingdoor.net): Sitemaps → отправить `https://www.vikingdoor.net/sitemap.xml` заново. Проверить «URL Inspection» на 2–3 ключевых страницах.
 6. Google Business Profile: убедиться, что ссылка сайта — https://www.vikingdoor.net/ и телефон (864) 921-7373 (заодно закрывается NAP-конфликт: старый логотип с номером 656-224-1533 на новом сайте не используется).
+7. В contact/index.html поменять `_next` формы с github.io-адреса обратно на `https://www.vikingdoor.net/thank-you/` и запушить.
 
 ## Почему SEO не слетит
 
