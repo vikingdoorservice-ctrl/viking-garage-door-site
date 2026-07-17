@@ -6,17 +6,17 @@
 
 ⚠️ На этом Mac нет Homebrew и gh — используем чистый git (он установлен), ничего ставить не нужно.
 
-1. В браузере (логин TarasHolub1992): **github.com/new** → Repository name: `viking-garage-door-site` → выбрать **Public** → галочки README/.gitignore НЕ ставить → Create repository.
+1. В браузере (логин vikingdoorservice-ctrl): **github.com/new** → Repository name: `viking-garage-door-site` → выбрать **Public** → галочки README/.gitignore НЕ ставить → Create repository.
 2. Создать токен: **github.com/settings/tokens** → Generate new token (classic) → Note: `mac-push`, галочка **repo** → Generate token → скопировать строку `ghp_…` (показывается один раз).
 3. В терминале:
 
 ```bash
 cd "/Users/taras/viking marketing/projects/01-site/site"
-git remote add origin https://github.com/TarasHolub1992/viking-garage-door-site.git
+git remote add origin https://github.com/vikingdoorservice-ctrl/viking-garage-door-site.git
 git push -u origin main
 ```
 
-На вопрос Username ввести `TarasHolub1992`, на Password вставить токен (Cmd+V; символы не отображаются — это нормально) и Enter. macOS запомнит токен в Keychain — второй раз вводить не придётся.
+На вопрос Username ввести `vikingdoorservice-ctrl`, на Password вставить токен (Cmd+V; символы не отображаются — это нормально) и Enter. macOS запомнит токен в Keychain — второй раз вводить не придётся.
 
 Репозиторий должен быть **public** — бесплатный GitHub Pages не работает с приватными.
 
@@ -24,9 +24,9 @@ git push -u origin main
 
 ## Шаг 2. Включить GitHub Pages
 
-github.com/TarasHolub1992/viking-garage-door-site → Settings → Pages → Source: «Deploy from a branch» → Branch: `main`, папка `/ (root)` → Save.
+github.com/vikingdoorservice-ctrl/viking-garage-door-site → Settings → Pages → Source: «Deploy from a branch» → Branch: `main`, папка `/ (root)` → Save.
 
-Через ~2 минуты сайт живёт на `https://tarasholub1992.github.io/viking-garage-door-site/`. Это превью-адрес: старому сайту он не мешает (canonical у всех страниц указывает на vikingdoor.net).
+Через ~2 минуты сайт живёт на `https://vikingdoorservice-ctrl.github.io/viking-garage-door-site/`. Это превью-адрес: старому сайту он не мешает (canonical у всех страниц указывает на vikingdoor.net).
 
 ## Шаг 3. Перед переключением домена (чек-лист)
 
@@ -40,7 +40,7 @@ github.com/TarasHolub1992/viking-garage-door-site → Settings → Pages → Sou
 
 1. В репозитории: Settings → Pages → Custom domain → `www.vikingdoor.net` → Save (создаст файл CNAME). Включить «Enforce HTTPS» после проверки.
 2. У DNS-провайдера домена (домен куплен через Wix — DNS управляется в Wix account → Domains, либо перенести DNS на Cloudflare):
-   - `www` CNAME → `tarasholub1992.github.io`
+   - `www` CNAME → `vikingdoorservice-ctrl.github.io`
    - apex `vikingdoor.net` A-записи → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
 3. Подождать пропагацию (до пары часов), проверить https://www.vikingdoor.net/ и все страницы из sitemap.
 4. В Wix: домен отключить от старого сайта (НЕ удалять сам сайт — пусть лежит как архив).
