@@ -4,16 +4,11 @@
 
 ## Шаг 1. Запушить на GitHub (нужен доступ владельца)
 
-На этой машине нет ключей GitHub, поэтому один раз надо авторизоваться. Вариант А (проще):
+⚠️ На этом Mac нет Homebrew и gh — используем чистый git (он установлен), ничего ставить не нужно.
 
-```bash
-brew install gh          # если brew нет: https://cli.github.com
-gh auth login            # выбрать GitHub.com → HTTPS → Login with a web browser
-cd "/Users/taras/viking marketing/projects/01-site/site"
-gh repo create viking-garage-door-site --public --source . --push
-```
-
-Вариант Б (без gh): создать пустой репозиторий `viking-garage-door-site` на github.com (аккаунт TarasHolub1992), затем:
+1. В браузере (логин TarasHolub1992): **github.com/new** → Repository name: `viking-garage-door-site` → выбрать **Public** → галочки README/.gitignore НЕ ставить → Create repository.
+2. Создать токен: **github.com/settings/tokens** → Generate new token (classic) → Note: `mac-push`, галочка **repo** → Generate token → скопировать строку `ghp_…` (показывается один раз).
+3. В терминале:
 
 ```bash
 cd "/Users/taras/viking marketing/projects/01-site/site"
@@ -21,9 +16,11 @@ git remote add origin https://github.com/TarasHolub1992/viking-garage-door-site.
 git push -u origin main
 ```
 
-(Git спросит логин/пароль — вместо пароля вставить Personal Access Token: github.com → Settings → Developer settings → Tokens.)
+На вопрос Username ввести `TarasHolub1992`, на Password вставить токен (Cmd+V; символы не отображаются — это нормально) и Enter. macOS запомнит токен в Keychain — второй раз вводить не придётся.
 
 Репозиторий должен быть **public** — бесплатный GitHub Pages не работает с приватными.
+
+Альтернатива без терминала: подключить GitHub-коннектор в настройках claude.ai (Settings → Connectors) — тогда Claude создаст репозиторий и зальёт файлы сам.
 
 ## Шаг 2. Включить GitHub Pages
 
