@@ -172,7 +172,10 @@ h3 { font-size: 1.35rem; }
   letter-spacing: 0.06em;
   font-size: 1.02rem;
 }
-.trustbar-inner span { display: inline-flex; align-items: center; gap: 8px; }
+.trustbar-inner span,
+.trustbar-inner a { display: inline-flex; align-items: center; gap: 8px; }
+.trustbar-inner a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.trustbar-inner a:hover { text-decoration: none; }
 
 /* Sections */
 .section { padding: 72px 0; }
