@@ -1,60 +1,78 @@
-# Миграция vikingdoor.net: Wix → GitHub Pages
+# Миграция vikingdoor.net: Wix → GitHub Pages (боевой рунбук)
 
-Статус на 17.07.2026: сайт собран локально, git-коммит готов. Осталось: push на GitHub → включить Pages → одобрение владельца → переключение домена.
+Статус на 20.07.2026: новый сайт живёт на превью-адресе
+`https://vikingdoorservice-ctrl.github.io/viking-garage-door-site/`.
+Осталось переключить домен **vikingdoor.net** со старого Wix на новый сайт.
+Старый сайт Wix НЕ удаляем — он остаётся архивом и точкой отката.
 
-## Шаг 1. Запушить на GitHub (нужен доступ владельца)
+---
 
-⚠️ На этом Mac нет Homebrew и gh — используем чистый git (он установлен), ничего ставить не нужно.
+## Почему SEO не слетит (главное)
 
-1. В браузере (логин vikingdoorservice-ctrl): **github.com/new** → Repository name: `viking-garage-door-site` → выбрать **Public** → галочки README/.gitignore НЕ ставить → Create repository.
-2. Создать токен: **github.com/settings/tokens** → Generate new token (classic) → Note: `mac-push`, галочка **repo** → Generate token → скопировать строку `ghp_…` (показывается один раз).
-3. В терминале:
+- **4 ранжирующихся URL сохранены 1:1** — `/garage-door-repair-spartanburg-sc/`, `/garage-door-installation-spartanburg-sc/`, `/spring-replacement/`, `/opener-installation/` и главная `/`. Слоги совпадают дословно → позиции переезжают напрямую, редирект не нужен.
+- **Второстепенные старые URL** (`/about`, `/services`, `/services-7`, `/book-online`, `/garage-door-service-south-carolina`, `/blog`) отдают мгновенный redirect (meta refresh 0) + canonical на ближайшую новую страницу.
+- **Title, meta description, H1 и все JSON-LD схемы** (LocalBusiness, Service ×3, FAQPage ×2) перенесены дословно.
+- **Meta Pixel и Google Ads тег** стоят на всех страницах — реклама и конверсии не прервутся.
+- У домена **нет почты** (почта на @gmail.com) → MX-записи трогать не нужно, риск минимальный.
 
-```bash
-cd "/Users/taras/viking marketing/projects/01-site/site"
-git remote add origin https://github.com/vikingdoorservice-ctrl/viking-garage-door-site.git
-git push -u origin main
-```
+---
 
-На вопрос Username ввести `vikingdoorservice-ctrl`, на Password вставить токен (Cmd+V; символы не отображаются — это нормально) и Enter. macOS запомнит токен в Keychain — второй раз вводить не придётся.
+## Пред-полётный чек-лист (до переключения)
 
-Репозиторий должен быть **public** — бесплатный GitHub Pages не работает с приватными.
+- [ ] Владелец посмотрел новый сайт и одобрил
+- [ ] **Форма контактов активирована**: открыть `/contact/` на превью → отправить тестовую заявку → в почте vikingdoorservice@gmail.com письмо от FormSubmit → нажать **Activate** → отправить ещё раз, убедиться что заявка дошла. (Или заменить на форму Jobber — Jobber → Settings → Requests → Add to website.)
+- [ ] (Опц.) Прогнать https://search.google.com/test/rich-results на страницах repair и spring
 
-Альтернатива без терминала: подключить GitHub-коннектор в настройках claude.ai (Settings → Connectors) — тогда Claude создаст репозиторий и зальёт файлы сам.
+---
 
-## Шаг 2. Включить GitHub Pages
+## Текущие DNS (Wix) — ЗАПИСАТЬ ДЛЯ ОТКАТА
 
-github.com/vikingdoorservice-ctrl/viking-garage-door-site → Settings → Pages → Source: «Deploy from a branch» → Branch: `main`, папка `/ (root)` → Save.
+Домен на нейм-серверах Wix: `ns8.wixdns.net`, `ns9.wixdns.net`.
+Текущие записи (снято 20.07.2026):
+- apex `vikingdoor.net` → A: `185.230.63.107`, `185.230.63.186`, `185.230.63.171`
+- `www` → CNAME на Wix CDN (`cdn1.wixdns.net`)
 
-Через ~2 минуты сайт живёт на `https://vikingdoorservice-ctrl.github.io/viking-garage-door-site/`. Это превью-адрес: старому сайту он не мешает (canonical у всех страниц указывает на vikingdoor.net).
+Откат = вернуть эти записи или в Wix нажать **Reconnect domain to this site**.
 
-## Шаг 3. Перед переключением домена (чек-лист)
+---
 
-- [ ] Владелец посмотрел сайт и одобрил дизайн/тексты
-- [ ] Цены в /calculator/ подтверждены владельцем
-- [ ] Форма /contact/ активирована: отправить тестовую заявку → в почте vikingdoorservice@gmail.com письмо от FormSubmit → нажать Activate → повторить тест
-- [ ] (Опционально) заменить форму на Jobber: Jobber → Settings → Requests → Add to website
-- [ ] Прогнать https://search.google.com/test/rich-results на страницах repair и spring (схемы FAQ/Service)
+## Переключение (делать вместе, по порядку)
 
-## Шаг 4. Переключение домена vikingdoor.net (только вместе с владельцем)
+### Шаг 1. GitHub: назначить домен
+`github.com/vikingdoorservice-ctrl/viking-garage-door-site` → **Settings → Pages → Custom domain** → ввести `www.vikingdoor.net` → **Save**.
+(GitHub создаст файл `CNAME` в репозитории и начнёт выпуск SSL-сертификата. Превью-адрес с этого момента будет вести на новый домен — это нормально.)
 
-1. В репозитории: Settings → Pages → Custom domain → `www.vikingdoor.net` → Save (создаст файл CNAME). Включить «Enforce HTTPS» после проверки.
-2. У DNS-провайдера домена (домен куплен через Wix — DNS управляется в Wix account → Domains, либо перенести DNS на Cloudflare):
-   - `www` CNAME → `vikingdoorservice-ctrl.github.io`
-   - apex `vikingdoor.net` A-записи → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-3. Подождать пропагацию (до пары часов), проверить https://www.vikingdoor.net/ и все страницы из sitemap.
-4. В Wix: домен отключить от старого сайта (НЕ удалять сам сайт — пусть лежит как архив).
-5. Google Search Console (property vikingdoor.net): Sitemaps → отправить `https://www.vikingdoor.net/sitemap.xml` заново. Проверить «URL Inspection» на 2–3 ключевых страницах.
-6. Google Business Profile: убедиться, что ссылка сайта — https://www.vikingdoor.net/ и телефон (864) 921-7373 (заодно закрывается NAP-конфликт: старый логотип с номером 656-224-1533 на новом сайте не используется).
-7. В contact/index.html поменять `_next` формы с github.io-адреса обратно на `https://www.vikingdoor.net/thank-you/` и запушить.
+### Шаг 2. Wix: перенаправить DNS
+Wix account → **Domains** → vikingdoor.net → **Advanced / DNS Records**. Заменить веб-записи:
+- **A** (host `@` / apex) → четыре записи GitHub:
+  `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+- **CNAME** (host `www`) → `vikingdoorservice-ctrl.github.io`
 
-## Почему SEO не слетит
+Старые Wix A-записи и www-CNAME при этом убрать/перезаписать.
 
-- Слоги всех ранжирующихся URL сохранены 1:1 (repair, installation, spring, opener); старые второстепенные URL (/about, /services, /book-online, /blog, /garage-door-service-south-carolina) отдают мгновенный redirect + canonical.
-- Title, meta description, H1 и все JSON-LD схемы (LocalBusiness, Service ×3, FAQPage ×2) перенесены дословно.
-- Meta Pixel и Google Ads тег стоят на всех страницах — конверсии рекламы не прервутся.
-- GitHub Pages сам делает 301 с URL-без-слэша на URL-со-слэшем — canonical совпадает с конечным адресом.
+### Шаг 3. Подождать и проверить
+Пропагация 15 мин – 2 ч. Проверить, что открывается новый сайт и все страницы из `sitemap.xml`:
+`https://www.vikingdoor.net/`, `/garage-door-repair-spartanburg-sc/`, `/garage-door-installation-spartanburg-sc/`, `/spring-replacement/`, `/opener-installation/`, `/contact/`, `/calculator/`.
+Проверить 2–3 старых URL (`/services`, `/book-online`) — должны редиректить.
+
+### Шаг 4. GitHub: включить HTTPS
+Когда сертификат выпущен (в Settings → Pages пропадёт предупреждение) — поставить галочку **Enforce HTTPS**.
+
+### Шаг 5. Обновить внутренние ссылки на боевой домен (делает Claude)
+- `contact/index.html`: `_next` формы → `https://www.vikingdoor.net/thank-you/`
+- `automation/posts.json`: адреса картинок → `https://www.vikingdoor.net/assets/img/...`
+- Make: URL в модуле HTTP обоих сценариев (5707112, 5710112) → `https://www.vikingdoor.net/automation/posts.json`
+- Push.
+
+### Шаг 6. Google
+- **Search Console** (property vikingdoor.net): Sitemaps → отправить `https://www.vikingdoor.net/sitemap.xml` заново. URL Inspection на 2–3 ключевых страницах → Request Indexing.
+- **Google Business Profile**: сайт = `https://www.vikingdoor.net/`, телефон (864) 921-7373 (заодно закрывается NAP-конфликт со старым номером 656-224-1533).
+
+### Шаг 7. Wix
+Отключить домен от старого сайта (**НЕ удалять** сам сайт — пусть лежит архивом).
+
+---
 
 ## Откат
 
-Если что-то пошло не так — вернуть DNS-записи на Wix (Wix account → Domains → Reconnect) — старый сайт нетронут и вернётся в течение часа-двух.
+Если что-то пошло не так на Шаге 2–3 — вернуть DNS-записи на значения из блока выше, либо Wix → Domains → **Reconnect to this site**. Старый сайт нетронут, вернётся за 1–2 часа. Внешние посетители во время пропагации видят рабочий сайт (старый или новый) — простоя нет.
