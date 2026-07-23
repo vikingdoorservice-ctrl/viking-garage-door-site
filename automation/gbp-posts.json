@@ -1,0 +1,85 @@
+{
+  "_meta": {
+    "business": "Viking Garage Door",
+    "phone": "(864) 921-7373",
+    "area": "Spartanburg, Greenville, Boiling Springs and the SC Upstate",
+    "note": "Google Business Profile post bank. GBP posts expire ~7 days, so cadence = 1-2 per week (NOT 3/day like social). Rotate top to bottom. Each post has a CTA button. cta_type: CALL uses the profile phone (no url needed); LEARN_MORE/BOOK use cta_url. Keep summaries under ~1500 chars; shorter + local keywords works best.",
+    "imageBase": "https://www.vikingdoor.net/assets/img/",
+    "cadence": "1-2 per week",
+    "updated": "2026-07-23"
+  },
+  "posts": [
+    {
+      "summary": "Broken garage door spring in Spartanburg or Boiling Springs? Don't force the door — a snapped spring puts the whole weight on your opener and cables. We replace torsion springs same-day with high-cycle springs, starting around $290. Call Viking Garage Door for a free quote.",
+      "cta_type": "CALL",
+      "cta_url": "",
+      "image": "https://www.vikingdoor.net/assets/img/install-brown-viking.jpg"
+    },
+    {
+      "summary": "Thinking about a new garage door? A fresh door is one of the best returns on curb appeal for your home. We install insulated steel, modern flush, and carriage-house styles across the Upstate — installed from $2,050 with old-door haul-away included. Browse styles and build yours online.",
+      "cta_type": "LEARN_MORE",
+      "cta_url": "https://www.vikingdoor.net/garage-doors/",
+      "image": "https://www.vikingdoor.net/assets/img/door-modern-black.jpg"
+    },
+    {
+      "summary": "Garage door opener acting up? Grinding noise, reversing halfway, or a remote that only works up close usually means a worn gear or a failing logic board. We install and calibrate LiftMaster, Chamberlain and Genie openers, including quiet belt-drive and smart Wi-Fi models. Free estimate.",
+      "cta_type": "LEARN_MORE",
+      "cta_url": "https://www.vikingdoor.net/opener-installation/",
+      "image": "https://www.vikingdoor.net/assets/img/opener-chamberlain.jpg"
+    },
+    {
+      "summary": "Door off its track? Stop hitting the button — you'll bend the rollers and turn a small repair into a big one. We re-align tracks, replace rollers and cables, and get your door running safely again, usually within 1–2 hours. Serving Spartanburg, Greer, Duncan, Inman and Boiling Springs.",
+      "cta_type": "CALL",
+      "cta_url": "",
+      "image": "https://www.vikingdoor.net/assets/img/install-brown-viking.jpg"
+    },
+    {
+      "summary": "Free tip: if your garage door opens halfway then stops and reverses, check the two little safety sensors down by the floor. A knocked-out-of-line sensor or a spider web across it is the #1 cause. Two-minute fix most of the time. Still stuck? We're out across the Upstate daily.",
+      "cta_type": "CALL",
+      "cta_url": "",
+      "image": "https://www.vikingdoor.net/assets/img/interior-two-doors.jpg"
+    },
+    {
+      "summary": "Is an insulated garage door worth it in South Carolina? If your garage is attached or you spend time out there — yes. Insulated steel keeps the heat out in summer, runs quieter, and resists dents. On a double door, insulation adds about $260–$420. Ask us at your free estimate.",
+      "cta_type": "LEARN_MORE",
+      "cta_url": "https://www.vikingdoor.net/blog/insulated-garage-door-south-carolina/",
+      "image": "https://www.vikingdoor.net/assets/img/install-farmhouse.jpg"
+    },
+    {
+      "summary": "Same-day garage door repair across Spartanburg County. We keep our trucks stocked with springs, cables, rollers and openers, so most repairs are done on the first visit — no waiting around for parts. Local crew, real phone, honest pricing. Call Viking Garage Door.",
+      "cta_type": "CALL",
+      "cta_url": "",
+      "image": "https://www.vikingdoor.net/assets/img/viking-team.jpg"
+    },
+    {
+      "summary": "Garage door dented from a bump? Sometimes we can swap just the one damaged section instead of replacing the whole door — saving you money. Send us a photo and we'll tell you straight what it needs. Free estimates for repair or full replacement across Greenville and Spartanburg.",
+      "cta_type": "LEARN_MORE",
+      "cta_url": "https://www.vikingdoor.net/garage-door-repair-spartanburg-sc/",
+      "image": "https://www.vikingdoor.net/assets/img/door-grey-stone.jpg"
+    },
+    {
+      "summary": "How long do garage door springs last? Standard springs are rated for about 10,000 cycles — roughly 7 years of normal use. If yours is sounding rough or the door feels heavy, don't wait for it to snap on a Monday morning. We'll check the balance and tension free while we're out.",
+      "cta_type": "CALL",
+      "cta_url": "",
+      "image": "https://www.vikingdoor.net/assets/img/hero-dark-house.jpg"
+    },
+    {
+      "summary": "New to the Greenville area and need a garage door pro? We're Boiling Springs based and cover Greer, Taylors, Simpsonville and the Eastside with no trip charge. Repairs, springs, openers and new-door installs — 4.8★ from your Upstate neighbors. Call for a free estimate.",
+      "cta_type": "LEARN_MORE",
+      "cta_url": "https://www.vikingdoor.net/garage-door-repair-greenville-sc/",
+      "image": "https://www.vikingdoor.net/assets/img/door-modern-black.jpg"
+    },
+    {
+      "summary": "Annual garage door tune-up: we lubricate rollers and hinges, check spring tension and door balance, align the safety sensors, and calibrate the opener force. It's the cheapest way to avoid a surprise breakdown and add years to your door. Ask about it on your next call.",
+      "cta_type": "CALL",
+      "cta_url": "",
+      "image": "https://www.vikingdoor.net/assets/img/viking-team.jpg"
+    },
+    {
+      "summary": "One cable snapped and your door is hanging crooked? Stop using it right away — it's a two-cable system and the other side is under heavy tension. We'll come make it safe and get it working the same day. Serving all of Spartanburg, Boiling Springs and Greenville.",
+      "cta_type": "CALL",
+      "cta_url": "",
+      "image": "https://www.vikingdoor.net/assets/img/install-brown-viking.jpg"
+    }
+  ]
+}
