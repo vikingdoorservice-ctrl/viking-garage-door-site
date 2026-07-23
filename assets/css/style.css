@@ -228,7 +228,7 @@ h3 { font-size: 1.35rem; }
 .section-dark .checklist li { color: rgba(247,245,241,0.9); }
 
 .split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; margin-top: 30px; }
-.split img { border-radius: var(--radius); box-shadow: var(--shadow); }
+.split img { border-radius: var(--radius); box-shadow: var(--shadow); width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
 /* Stats / reviews */
 .review-band { text-align: center; }
