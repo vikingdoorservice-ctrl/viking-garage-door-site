@@ -268,11 +268,12 @@
 
   /* window / motif icon options */
   .opt-icon {
+    display: block;
     width: 100%;
     height: 34px;
     margin-bottom: 8px;
   }
-  .opt-icon svg { width: 100%; height: 100%; }
+  .opt-icon svg { display: block; width: 100%; height: 100%; }
 
   .opt .name { font-size: 13px; font-weight: 650; display: block; }
   .opt .desc { font-size: 11.5px; color: var(--ink-soft); margin-top: 3px; display: block; line-height: 1.4; }
@@ -425,9 +426,9 @@
 
 <div class="vgd-app">
   <div class="masthead">
-    <div class="eyebrow">Viking Garage Door · Greenville &amp; Spartanburg, SC</div>
-    <h1>Build your door</h1>
-    <p>Pick a size, insulation, windows, color, and opener. Prices come straight from our current stock list, with professional installation added as its own line — then text or call to lock in your exact quote.</p>
+    <div class="eyebrow">Viking Garage Door · Genuine Garaga Doors · Greenville &amp; Spartanburg, SC</div>
+    <h1>Build your Garaga door</h1>
+    <p>We sell and install genuine <strong>Garaga</strong> garage doors — North-American-made steel doors with polyurethane-injected insulation up to R-16. Pick a size, design, insulation, windows, and color; prices come straight from our current stock list, with professional installation added as its own line — then text or call to lock in your exact quote.</p>
   </div>
 
   <div class="workbench">
@@ -450,6 +451,11 @@
         <div class="opt-row grid-4" id="group-size-res"></div>
         <div class="size-subhead">Commercial</div>
         <div class="opt-row grid-4" id="group-size-com"></div>
+      </div>
+
+      <div class="spec-group" data-group="design">
+        <div class="spec-group-head"><h2>Design</h2><span class="picked" id="pick-design"></span></div>
+        <div class="opt-row grid-4" id="group-design"></div>
       </div>
 
       <div class="spec-group" data-group="insulation">
@@ -549,6 +555,16 @@
       </div>
 
     </div>
+
+    <div class="pl-card" style="margin-top:16px;">
+      <h3>Garaga collections we install</h3>
+      <div class="pl-row"><span class="l"><strong>Standard+</strong> — polyurethane-injected steel sandwich doors, up to R-16 <small>designs: Classic CC / XL, Shaker-Flat, Vog, Prestige, Moderno</small></span></div>
+      <div class="pl-row"><span class="l"><strong>Townships Collection</strong> — carriage-house doors with decorative overlays <small>models: Princeton, Eastman, Cambridge</small></span></div>
+      <div class="pl-row"><span class="l"><strong>North Hatley</strong> — country &amp; carriage style with elongated LP panels <small>pairs with Orion 8-lite windows</small></span></div>
+      <div class="pl-row"><span class="l"><strong>Panoramic / California</strong> — full-view designs with sandblasted glass <small>maximum light, modern homes</small></span></div>
+      <div class="pl-row"><span class="l">Viking Garage Door is an independent local dealer — we sell and install genuine Garaga doors. Any collection, size, or window layout quoted free: <strong>(864) 921-7373</strong>.</span></div>
+    </div>
+
     <p class="pricelist-note">Sizes are width × height in feet. Every price is confirmed on a free measure — spring type, headroom, framing, and old-door haul-away can change the final number.</p>
   </div>
 </div>
@@ -570,24 +586,31 @@
     { id: "c128",  w: 12,    h: 8,  dim: "12′ × 8′",    sub: "Roll-up sheet",     price: 1655, labor: 1000, laborFrom: true,  laborLabel: "commercial", com: true, rollup: true },
     { id: "c1214", w: 12,    h: 14, dim: "12′ × 14′",   sub: "Commercial, tall",  price: 3215, labor: 1000, laborFrom: true,  laborLabel: "commercial", com: true }
   ];
+  var DESIGN = [
+    { id: "classic",  name: "Classic",        desc: "Raised panels · CC short / XL long", price: 0 },
+    { id: "shaker",   name: "Shaker-Flat",    desc: "Recessed flat panels",               price: 0 },
+    { id: "moderno",  name: "Moderno / Vog",  desc: "Smooth contemporary lines",          price: 0 },
+    { id: "carriage", name: "Carriage House", desc: "Townships &amp; North Hatley overlays", price: 0, note: "priced on quote" }
+  ];
   var INSULATION = [
-    { id: "none",  name: "Non-insulated", desc: "Single steel skin",              price: 0,   label: "Non-insulated · single steel skin" },
-    { id: "vinyl", name: "Vinyl back",    desc: "Insulation + vinyl backer",      price: 400, label: "Insulated · vinyl back" },
-    { id: "steel", name: "Steel back",    desc: "Insulated steel sandwich",       price: 700, label: "Insulated · steel back sandwich" }
+    { id: "none",  name: "Non-insulated", desc: "Single steel skin",                        price: 0,   label: "Non-insulated · single steel skin" },
+    { id: "vinyl", name: "Vinyl back",    desc: "Insulation + vinyl backer",                price: 400, label: "Insulated · vinyl back" },
+    { id: "steel", name: "Steel back",    desc: "Sandwich door · up to R-16 (Standard+)",   price: 700, label: "Insulated · steel sandwich, up to R-16" }
   ];
   var WINDOWS = [
-    { id: "none",  name: "None",        desc: "Solid top section",        price: 0 },
-    { id: "short", name: "Short panel", desc: "Row of panes, top section", price: 450 },
-    { id: "long",  name: "Long panel",  desc: "Wide lites, top section",   price: 450 }
+    { id: "none",  name: "None",             desc: "Solid top section",              price: 0 },
+    { id: "short", name: "Orion 8-lite",     desc: "Classic grid panes, top section", price: 450 },
+    { id: "long",  name: "Panoramic 4-lite", desc: "Wide modern lites, top section",  price: 450 }
   ];
   var COLORS = [
-    { id: "white",    name: "White",        hex: "#eeece4", price: 0 },
-    { id: "almond",   name: "Almond",       hex: "#e2d5b8", price: 0 },
-    { id: "sandtone", name: "Sandtone",     hex: "#c7ac81", price: 0 },
-    { id: "brown",    name: "Brown",        hex: "#5a4230", price: 0 },
-    { id: "black",    name: "Black",        hex: "#2a2b2c", price: 350 },
-    { id: "slate",    name: "Slate Gray",   hex: "#585f66", price: 350 },
-    { id: "custom",   name: "Custom color", hex: "#3d5a80", css: "linear-gradient(135deg,#8a3b3b,#3d5a80 55%,#4a7c59)", price: 350 }
+    { id: "icewhite",  name: "Ice White",       hex: "#f2f1ec", price: 0 },
+    { id: "dsand",     name: "Desert Sand",     hex: "#d8c8a2", price: 0 },
+    { id: "claystone", name: "Claystone",       hex: "#b9b0a1", price: 0 },
+    { id: "darksand",  name: "Dark Sand",       hex: "#a89878", price: 0 },
+    { id: "moka",      name: "Moka Brown",      hex: "#4c3b2d", price: 350 },
+    { id: "charcoal",  name: "Charcoal",        hex: "#3a3d40", price: 350 },
+    { id: "black",     name: "Black",           hex: "#1e1f21", price: 350 },
+    { id: "walnut",    name: "American Walnut", hex: "#6b4a33", css: "linear-gradient(90deg,#6b4a33,#7d5a3f 30%,#5c3e2a 62%,#75543a)", price: 350 }
   ];
   var TRACK = [
     { id: "std",  name: "Standard lift", desc: "Normal headroom track",                       price: 0 },
@@ -598,7 +621,7 @@
     { id: "install", name: "Motor installation", desc: "We hang, wire & tune your opener", price: 250, from: true }
   ];
 
-  var state = { size: "r167", insulation: "none", windows: "none", color: "white", track: "std", opener: "none" };
+  var state = { size: "r167", design: "classic", insulation: "none", windows: "none", color: "icewhite", track: "std", opener: "none" };
   var byId = function (list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i]; };
 
   function buildOptionGroups() {
@@ -610,6 +633,13 @@
     };
     renderGroup("group-size-res", SIZES.filter(function (o) { return !o.com; }), "size", sizeCard);
     renderGroup("group-size-com", SIZES.filter(function (o) { return o.com; }), "size", sizeCard);
+
+    renderGroup("group-design", DESIGN, "design", function (o) {
+      return '<span class="opt-icon">' + designIcon(o.id) + '</span>' +
+             '<span class="name">' + o.name + '</span>' +
+             '<span class="desc">' + o.desc + '</span>' +
+             '<span class="price mono">' + (o.note ? o.note : 'included') + '</span>';
+    });
 
     renderGroup("group-insulation", INSULATION, "insulation", function (o) {
       return '<span class="name">' + o.name + '</span>' +
@@ -678,6 +708,34 @@
     return s;
   }
 
+  function designIcon(id) {
+    var s = '<svg viewBox="0 0 100 34" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">';
+    if (id === "classic") {
+      for (var i = 0; i < 3; i++) {
+        var y = 4 + i * 10;
+        s += '<rect x="6" y="' + y + '" width="88" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/>';
+        s += '<rect x="10" y="' + (y + 2) + '" width="80" height="3" rx="1" fill="currentColor" opacity="0.25"/>';
+      }
+    } else if (id === "shaker") {
+      for (var j = 0; j < 2; j++) {
+        var x = 6 + j * 46;
+        s += '<rect x="' + x + '" y="5" width="42" height="24" fill="none" stroke="currentColor" stroke-width="1.6"/>';
+        s += '<rect x="' + (x + 6) + '" y="11" width="30" height="12" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>';
+      }
+    } else if (id === "moderno") {
+      s += '<rect x="6" y="4" width="88" height="26" fill="none" stroke="currentColor" stroke-width="1.6"/>';
+      s += '<line x1="6" y1="13" x2="94" y2="13" stroke="currentColor" stroke-width="1" opacity="0.5"/>';
+      s += '<line x1="6" y1="22" x2="94" y2="22" stroke="currentColor" stroke-width="1" opacity="0.5"/>';
+    } else if (id === "carriage") {
+      s += '<rect x="6" y="4" width="88" height="26" fill="none" stroke="currentColor" stroke-width="1.6"/>';
+      s += '<line x1="50" y1="4" x2="50" y2="30" stroke="currentColor" stroke-width="1.4"/>';
+      s += '<line x1="8" y1="29" x2="48" y2="17" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>';
+      s += '<line x1="92" y1="29" x2="52" y2="17" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>';
+    }
+    s += '</svg>';
+    return s;
+  }
+
   function renderDoor() {
     var size = byId(SIZES, state.size);
     var color = byId(COLORS, state.color);
@@ -716,11 +774,30 @@
     } else {
       var rows = size.h <= 8 ? 4 : (size.h <= 10 ? 5 : 7);
       var rowH = H / rows;
+      var design = state.design;
+      var rowGap = design === "moderno" ? 1.2 : 3;
       for (var i = 0; i < rows; i++) {
         var ry = doorY + i * rowH;
-        out += '<rect x="' + doorX + '" y="' + ry + '" width="' + W + '" height="' + (rowH - 3) + '" fill="' + color.hex + '" stroke="var(--door-shadow)" stroke-width="1"/>';
-        out += '<rect x="' + doorX + '" y="' + ry + '" width="' + W + '" height="4" fill="#ffffff" opacity="0.12"/>';
-        out += '<rect x="' + doorX + '" y="' + (ry + rowH - 7) + '" width="' + W + '" height="4" fill="#000000" opacity="0.10"/>';
+        out += '<rect x="' + doorX + '" y="' + ry + '" width="' + W + '" height="' + (rowH - rowGap) + '" fill="' + color.hex + '" stroke="var(--door-shadow)" stroke-width="1"/>';
+        if (design === "classic") {
+          out += '<rect x="' + doorX + '" y="' + ry + '" width="' + W + '" height="4" fill="#ffffff" opacity="0.12"/>';
+          out += '<rect x="' + doorX + '" y="' + (ry + rowH - 7) + '" width="' + W + '" height="4" fill="#000000" opacity="0.10"/>';
+        } else if (design === "shaker") {
+          var panels = Math.max(2, Math.round(size.w / 4));
+          var pw = W / panels;
+          for (var p = 0; p < panels; p++) {
+            out += '<rect x="' + (doorX + p * pw + 7) + '" y="' + (ry + 5) + '" width="' + (pw - 14) + '" height="' + (rowH - rowGap - 10) + '" fill="none" stroke="#000000" stroke-opacity="0.16" stroke-width="2"/>';
+          }
+        }
+      }
+      if (design === "carriage") {
+        var cx2 = doorX + W / 2;
+        var vTop = doorY + H * 0.52, vBot = doorY + H - 5;
+        out += '<line x1="' + cx2 + '" y1="' + doorY + '" x2="' + cx2 + '" y2="' + (doorY + H) + '" stroke="#000000" stroke-opacity="0.2" stroke-width="3"/>';
+        out += '<line x1="' + (doorX + 6) + '" y1="' + vBot + '" x2="' + (cx2 - 8) + '" y2="' + vTop + '" stroke="#000000" stroke-opacity="0.14" stroke-width="2.5"/>';
+        out += '<line x1="' + (doorX + W - 6) + '" y1="' + vBot + '" x2="' + (cx2 + 8) + '" y2="' + vTop + '" stroke="#000000" stroke-opacity="0.14" stroke-width="2.5"/>';
+        out += '<circle cx="' + (cx2 - 12) + '" cy="' + (doorY + H * 0.47) + '" r="3" fill="#000000" opacity="0.35"/>';
+        out += '<circle cx="' + (cx2 + 12) + '" cy="' + (doorY + H * 0.47) + '" r="3" fill="#000000" opacity="0.35"/>';
       }
       out += windowsOnDoor(state.windows, doorX, doorY, W, rowH);
     }
@@ -780,6 +857,7 @@
 
   function renderSummary() {
     var size = byId(SIZES, state.size);
+    var design = byId(DESIGN, state.design);
     var ins = byId(INSULATION, state.insulation);
     var win = byId(WINDOWS, state.windows);
     var color = byId(COLORS, state.color);
@@ -788,6 +866,7 @@
 
     var lines = [
       { label: size.dim + " door (" + size.sub + ")", amt: size.price },
+      { label: design.name + " design", amt: design.price, note: design.note },
       { label: ins.id === "none" ? "Non-insulated construction" : ins.name + " insulation", amt: ins.price },
       { label: win.id === "none" ? "No windows" : win.name + " windows", amt: win.price },
       { label: color.name + " finish", amt: color.price },
@@ -801,6 +880,7 @@
     document.getElementById("insulLabel").textContent = ins.label;
 
     document.getElementById("pick-size").textContent = size.dim;
+    document.getElementById("pick-design").textContent = design.name;
     document.getElementById("pick-insulation").textContent = ins.name;
     document.getElementById("pick-windows").textContent = win.name;
     document.getElementById("pick-color").textContent = color.name;
@@ -809,12 +889,12 @@
 
     var bd = document.getElementById("breakdownList");
     bd.innerHTML = lines.map(function (l) {
-      return '<div class="breakdown-row"><span>' + l.label + '</span><span class="amt mono">' + (l.amt ? (l.from ? "from +" : "+") + fmt(l.amt) : "included") + '</span></div>';
+      return '<div class="breakdown-row"><span>' + l.label + '</span><span class="amt mono">' + (l.note ? l.note : (l.amt ? (l.from ? "from +" : "+") + fmt(l.amt) : "included")) + '</span></div>';
     }).join("") +
       '<div class="breakdown-row"><span><strong>Estimated total, installed</strong></span><span class="amt mono">' + fmt(total) + '</span></div>' +
       '<div class="breakdown-note">Estimate only — installation is shown at its starting rate ($650 single car · from $750 double/oversize · from $1,000 commercial). Final price is confirmed on a free measure: spring type, headroom, framing, and old-door haul-away can change the quote. In-stock specials in the list below may beat this estimate.</div>';
 
-    var msg = "Hi Viking Garage Door — I built a door on your site: " + size.dim + ", " + ins.name + ", " + (win.id === "none" ? "no windows" : win.name + " windows") + ", " + color.name + ", " + track.name + " track, " + (op.id === "none" ? "no opener work" : "opener installation") + ". Estimated total installed " + fmt(total) + ". Can you confirm pricing and a time to measure?";
+    var msg = "Hi Viking Garage Door — I built a Garaga door on your site: " + size.dim + ", " + design.name + " design, " + ins.name + ", " + (win.id === "none" ? "no windows" : win.name + " windows") + ", " + color.name + ", " + track.name + " track, " + (op.id === "none" ? "no opener work" : "opener installation") + ". Estimated total installed " + fmt(total) + ". Can you confirm pricing and a time to measure?";
     document.getElementById("smsLink").href = "sms:+18649217373&body=" + encodeURIComponent(msg);
   }
 
