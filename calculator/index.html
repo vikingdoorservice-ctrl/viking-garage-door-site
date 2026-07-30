@@ -184,6 +184,16 @@
     color: var(--ink-soft);
   }
 
+  .size-subhead {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 16px 0 8px;
+  }
+  .size-subhead:first-of-type { margin-top: 0; }
+
   .opt-row {
     display: grid;
     gap: 10px;
@@ -237,6 +247,7 @@
   button.opt[aria-pressed="true"] .price { color: var(--oxide); }
 
   .opt-bar {
+    display: block;
     height: 3px;
     background: var(--line);
     border-radius: 2px;
@@ -354,13 +365,69 @@
     margin-top: 10px;
     line-height: 1.5;
   }
+
+  /* ---------- Stock price list ---------- */
+  .pricelist { margin-top: 64px; }
+  .pricelist-head { max-width: 640px; margin-bottom: 20px; }
+  .pricelist-head h2 {
+    font-size: clamp(20px, 3vw, 26px);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    font-weight: 750;
+  }
+  .pricelist-head p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .pricelist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 16px;
+    align-items: start;
+  }
+  .pl-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-panel);
+    padding: 16px 18px;
+    font-size: 13px;
+  }
+  .pl-card h3 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    color: var(--oxide);
+  }
+  .pl-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .pl-row:last-child { border-bottom: none; }
+  .pl-row .l { color: var(--ink); line-height: 1.4; }
+  .pl-row .l small { color: var(--ink-soft); display: block; font-size: 11px; }
+  .pl-row .amt { font-weight: 650; white-space: nowrap; }
+  .pricelist-note {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    line-height: 1.5;
+    max-width: 72ch;
+  }
 </style>
 
 <div class="vgd-app">
   <div class="masthead">
     <div class="eyebrow">Viking Garage Door · Greenville &amp; Spartanburg, SC</div>
     <h1>Build your door</h1>
-    <p>Pick a size, color, glass, insulation, and opener. The preview and price update as you go — then text or call to lock in your exact quote.</p>
+    <p>Pick a size, insulation, windows, color, and opener. Prices come straight from our current stock list, with professional installation added as its own line — then text or call to lock in your exact quote.</p>
   </div>
 
   <div class="workbench">
@@ -379,17 +446,10 @@
 
       <div class="spec-group" data-group="size">
         <div class="spec-group-head"><h2>Size</h2><span class="picked" id="pick-size"></span></div>
-        <div class="opt-row grid-4" id="group-size"></div>
-      </div>
-
-      <div class="spec-group" data-group="color">
-        <div class="spec-group-head"><h2>Color</h2><span class="picked" id="pick-color"></span></div>
-        <div class="opt-row grid-3" id="group-color"></div>
-      </div>
-
-      <div class="spec-group" data-group="windows">
-        <div class="spec-group-head"><h2>Windows</h2><span class="picked" id="pick-windows"></span></div>
-        <div class="opt-row grid-4" id="group-windows"></div>
+        <div class="size-subhead">Residential</div>
+        <div class="opt-row grid-4" id="group-size-res"></div>
+        <div class="size-subhead">Commercial</div>
+        <div class="opt-row grid-4" id="group-size-com"></div>
       </div>
 
       <div class="spec-group" data-group="insulation">
@@ -397,9 +457,24 @@
         <div class="opt-row grid-3" id="group-insulation"></div>
       </div>
 
+      <div class="spec-group" data-group="windows">
+        <div class="spec-group-head"><h2>Windows</h2><span class="picked" id="pick-windows"></span></div>
+        <div class="opt-row grid-3" id="group-windows"></div>
+      </div>
+
+      <div class="spec-group" data-group="color">
+        <div class="spec-group-head"><h2>Color</h2><span class="picked" id="pick-color"></span></div>
+        <div class="opt-row grid-4" id="group-color"></div>
+      </div>
+
+      <div class="spec-group" data-group="track">
+        <div class="spec-group-head"><h2>Track / lift</h2><span class="picked" id="pick-track"></span></div>
+        <div class="opt-row grid-3" id="group-track"></div>
+      </div>
+
       <div class="spec-group" data-group="opener" style="border-bottom:none;">
         <div class="spec-group-head"><h2>Opener / motor</h2><span class="picked" id="pick-opener"></span></div>
-        <div class="opt-row grid-4" id="group-opener"></div>
+        <div class="opt-row grid-3" id="group-opener"></div>
       </div>
 
     </div>
@@ -408,7 +483,7 @@
   <div class="summary-bar">
     <div class="summary-total">
       <div>
-        <span class="summary-label">Estimated total</span><br>
+        <span class="summary-label">Estimated total, installed</span><br>
         <span class="summary-price mono" id="totalPrice">$0</span>
       </div>
       <button class="summary-breakdown-toggle" id="toggleBreakdown" aria-expanded="false">show breakdown</button>
@@ -422,56 +497,123 @@
   <div class="breakdown" id="breakdownWrap" hidden>
     <div class="breakdown-inner" id="breakdownList"></div>
   </div>
+
+  <div class="pricelist">
+    <div class="pricelist-head">
+      <h2>Current stock list</h2>
+      <p>Doors we have priced right now — door only, installation billed per the labor rates below. Stock moves fast, so call or text to confirm availability before you decide.</p>
+    </div>
+    <div class="pricelist-grid">
+
+      <div class="pl-card">
+        <h3>Residential doors</h3>
+        <div class="pl-row"><span class="l">8×7 classic raised panel</span><span class="amt mono">$940</span></div>
+        <div class="pl-row"><span class="l">8×8 vinyl-back insulated</span><span class="amt mono">$1,250</span></div>
+        <div class="pl-row"><span class="l">9×8 vinyl-back insulated <small>with windows</small></span><span class="amt mono">$1,515</span></div>
+        <div class="pl-row"><span class="l">9×8 steel-back insulated <small>flush panel</small></span><span class="amt mono">$1,580</span></div>
+        <div class="pl-row"><span class="l">10×7 low-headroom pan door <small>raised panel, no windows</small></span><span class="amt mono">$1,215</span></div>
+        <div class="pl-row"><span class="l">10×8 vinyl-back insulated <small>with windows</small></span><span class="amt mono">$1,680</span></div>
+        <div class="pl-row"><span class="l">16×7 long panel</span><span class="amt mono">$1,540</span></div>
+        <div class="pl-row"><span class="l">16×7 pan door <small>with windows</small></span><span class="amt mono">$1,540</span></div>
+        <div class="pl-row"><span class="l">16×7 sections only <small>no hardware</small></span><span class="amt mono">$1,030</span></div>
+        <div class="pl-row"><span class="l">16×8 raised panel</span><span class="amt mono">$1,740</span></div>
+        <div class="pl-row"><span class="l">16×8 vinyl-back insulated <small>windows add $300</small></span><span class="amt mono">$1,785</span></div>
+        <div class="pl-row"><span class="l">16×8 windows in top section <small>short panel</small></span><span class="amt mono">$2,050</span></div>
+        <div class="pl-row"><span class="l">16×9 vinyl-back insulated</span><span class="amt mono">$2,402</span></div>
+        <div class="pl-row"><span class="l">18×8 non-insulated</span><span class="amt mono">$1,648</span></div>
+        <div class="pl-row"><span class="l">18×8 non-insulated <small>with glass</small></span><span class="amt mono">$1,845</span></div>
+        <div class="pl-row"><span class="l">18×8 non-insulated <small>long-panel windows</small></span><span class="amt mono">$1,998</span></div>
+      </div>
+
+      <div class="pl-card">
+        <h3>Commercial doors</h3>
+        <div class="pl-row"><span class="l">10×10 non-insulated <small>windows in one section</small></span><span class="amt mono">$2,205</span></div>
+        <div class="pl-row"><span class="l">10×10 vinyl-back insulated <small>windows in every section</small></span><span class="amt mono">$2,880</span></div>
+        <div class="pl-row"><span class="l">10×10 steel-back insulated <small>windows in every section</small></span><span class="amt mono">$3,355</span></div>
+        <div class="pl-row"><span class="l">10′2″×10 vinyl-back insulated</span><span class="amt mono">$2,120</span></div>
+        <div class="pl-row"><span class="l">10′2″×10 steel-back insulated</span><span class="amt mono">$2,420</span></div>
+        <div class="pl-row"><span class="l">12×8 roll-up door</span><span class="amt mono">$1,655</span></div>
+        <div class="pl-row"><span class="l">12×14 non-insulated</span><span class="amt mono">$3,215</span></div>
+      </div>
+
+      <div class="pl-card">
+        <h3>Installation &amp; options</h3>
+        <div class="pl-row"><span class="l">Install — single car <small>up to 9′ wide × 8′ tall</small></span><span class="amt mono">$650</span></div>
+        <div class="pl-row"><span class="l">Install — double / oversize <small>16×7, 10×8, 16×8 and up</small></span><span class="amt mono">from $750</span></div>
+        <div class="pl-row"><span class="l">Install — commercial</span><span class="amt mono">from $1,000</span></div>
+        <div class="pl-row"><span class="l">Opener / motor installation</span><span class="amt mono">from $250</span></div>
+        <div class="pl-row"><span class="l">Vinyl-back insulation upgrade</span><span class="amt mono">about +$400</span></div>
+        <div class="pl-row"><span class="l">Windows added to a door</span><span class="amt mono">about +$450</span></div>
+        <div class="pl-row"><span class="l">Custom color</span><span class="amt mono">+$350</span></div>
+        <div class="pl-row"><span class="l">High-lift conversion <small>as quoted for 18×8 · 6′ lift</small></span><span class="amt mono">$1,850</span></div>
+      </div>
+
+    </div>
+    <p class="pricelist-note">Sizes are width × height in feet. Every price is confirmed on a free measure — spring type, headroom, framing, and old-door haul-away can change the final number.</p>
+  </div>
 </div>
 
 <script>
 (function () {
   var SIZES = [
-    { id: "s8",  dim: "8′ × 7′",  sub: "Single car",        width: 220, price: 2050,  bar: 0.48 },
-    { id: "s9",  dim: "9′ × 7′",  sub: "Single car, wide",  width: 246, price: 2150, bar: 0.54 },
-    { id: "d16", dim: "16′ × 7′", sub: "Double car",        width: 420, price: 2750, bar: 0.88 },
-    { id: "d18", dim: "18′ × 7′", sub: "Double car, wide",  width: 452, price: 2900, bar: 1.0 }
-  ];
-  var COLORS = [
-    { id: "white",   name: "White",     hex: "#eeece4", price: 0 },
-    { id: "almond",  name: "Almond",    hex: "#e2d5b8", price: 0 },
-    { id: "black",   name: "Black",     hex: "#2a2b2c", price: 0 },
-    { id: "sandtone",name: "Sandtone",  hex: "#c7ac81", price: 95 },
-    { id: "brown",   name: "Brown",     hex: "#5a4230", price: 95 },
-    { id: "slate",   name: "Slate Gray",hex: "#585f66", price: 95 }
-  ];
-  var WINDOWS = [
-    { id: "none",     name: "None",       desc: "Solid top panel",         price: 0 },
-    { id: "standard", name: "Standard",   desc: "4 rectangular panes",     price: 180 },
-    { id: "arched",   name: "Arched",     desc: "4 arched panes",          price: 260 },
-    { id: "sunburst",name: "Sunburst",    desc: "1 fan window, centered",  price: 340 }
+    { id: "r87",   w: 8,     h: 7,  dim: "8′ × 7′",     sub: "Single car",        price: 940,  labor: 650,  laborFrom: false, laborLabel: "single car" },
+    { id: "r88",   w: 8,     h: 8,  dim: "8′ × 8′",     sub: "Single, tall",      price: 980,  labor: 650,  laborFrom: false, laborLabel: "single car" },
+    { id: "r98",   w: 9,     h: 8,  dim: "9′ × 8′",     sub: "Single, wide",      price: 1020, labor: 650,  laborFrom: false, laborLabel: "single car" },
+    { id: "r107",  w: 10,    h: 7,  dim: "10′ × 7′",    sub: "Low-headroom pan",  price: 1215, labor: 750,  laborFrom: true,  laborLabel: "oversize" },
+    { id: "r108",  w: 10,    h: 8,  dim: "10′ × 8′",    sub: "Single, oversize",  price: 1060, labor: 750,  laborFrom: true,  laborLabel: "oversize" },
+    { id: "r167",  w: 16,    h: 7,  dim: "16′ × 7′",    sub: "Double car",        price: 1540, labor: 750,  laborFrom: true,  laborLabel: "double car" },
+    { id: "r168",  w: 16,    h: 8,  dim: "16′ × 8′",    sub: "Double, tall",      price: 1740, labor: 750,  laborFrom: true,  laborLabel: "double car" },
+    { id: "r169",  w: 16,    h: 9,  dim: "16′ × 9′",    sub: "Double, 9′ tall",   price: 2000, labor: 750,  laborFrom: true,  laborLabel: "double car" },
+    { id: "r188",  w: 18,    h: 8,  dim: "18′ × 8′",    sub: "Double, wide",      price: 1648, labor: 750,  laborFrom: true,  laborLabel: "double car" },
+    { id: "c1010", w: 10,    h: 10, dim: "10′ × 10′",   sub: "Commercial",        price: 1755, labor: 1000, laborFrom: true,  laborLabel: "commercial", com: true },
+    { id: "c10210",w: 10.17, h: 10, dim: "10′2″ × 10′", sub: "Commercial, wide",  price: 1720, labor: 1000, laborFrom: true,  laborLabel: "commercial", com: true },
+    { id: "c128",  w: 12,    h: 8,  dim: "12′ × 8′",    sub: "Roll-up sheet",     price: 1655, labor: 1000, laborFrom: true,  laborLabel: "commercial", com: true, rollup: true },
+    { id: "c1214", w: 12,    h: 14, dim: "12′ × 14′",   sub: "Commercial, tall",  price: 3215, labor: 1000, laborFrom: true,  laborLabel: "commercial", com: true }
   ];
   var INSULATION = [
-    { id: "none", name: "Non-insulated", desc: "Single steel skin",                    price: 0,   label: "Non-insulated · single steel skin" },
-    { id: "r9",   name: "R-9",           desc: "2\" polystyrene core",                 price: 260, label: "R-9 insulated · 2\" polystyrene core" },
-    { id: "r18",  name: "R-18",          desc: "2\" polyurethane core, best sealing",  price: 420, label: "R-18 insulated · 2\" polyurethane core" }
+    { id: "none",  name: "Non-insulated", desc: "Single steel skin",              price: 0,   label: "Non-insulated · single steel skin" },
+    { id: "vinyl", name: "Vinyl back",    desc: "Insulation + vinyl backer",      price: 400, label: "Insulated · vinyl back" },
+    { id: "steel", name: "Steel back",    desc: "Insulated steel sandwich",       price: 700, label: "Insulated · steel back sandwich" }
+  ];
+  var WINDOWS = [
+    { id: "none",  name: "None",        desc: "Solid top section",        price: 0 },
+    { id: "short", name: "Short panel", desc: "Row of panes, top section", price: 450 },
+    { id: "long",  name: "Long panel",  desc: "Wide lites, top section",   price: 450 }
+  ];
+  var COLORS = [
+    { id: "white",    name: "White",        hex: "#eeece4", price: 0 },
+    { id: "almond",   name: "Almond",       hex: "#e2d5b8", price: 0 },
+    { id: "sandtone", name: "Sandtone",     hex: "#c7ac81", price: 0 },
+    { id: "brown",    name: "Brown",        hex: "#5a4230", price: 0 },
+    { id: "black",    name: "Black",        hex: "#2a2b2c", price: 350 },
+    { id: "slate",    name: "Slate Gray",   hex: "#585f66", price: 350 },
+    { id: "custom",   name: "Custom color", hex: "#3d5a80", css: "linear-gradient(135deg,#8a3b3b,#3d5a80 55%,#4a7c59)", price: 350 }
+  ];
+  var TRACK = [
+    { id: "std",  name: "Standard lift", desc: "Normal headroom track",                       price: 0 },
+    { id: "high", name: "High-lift",     desc: "Door rises high before turning · 18×8, 6′ kit", price: 1850 }
   ];
   var OPENERS = [
-    { id: "none",  name: "Keep existing", desc: "No new opener",                     price: 0 },
-    { id: "chain", name: "Chain drive",   desc: "1/2 HP · budget, louder",           price: 280 },
-    { id: "belt",  name: "Belt drive",    desc: "3/4 HP · quiet operation",          price: 420 },
-    { id: "smart", name: "Smart belt",    desc: "3/4 HP · WiFi + phone control",     price: 560 }
+    { id: "none",    name: "Keep existing",      desc: "No opener work",                 price: 0 },
+    { id: "install", name: "Motor installation", desc: "We hang, wire & tune your opener", price: 250, from: true }
   ];
 
-  var state = { size: "s9", color: "white", windows: "standard", insulation: "none", opener: "none" };
+  var state = { size: "r167", insulation: "none", windows: "none", color: "white", track: "std", opener: "none" };
   var byId = function (list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i]; };
 
   function buildOptionGroups() {
-    renderGroup("group-size", SIZES, "size", function (o, active) {
+    var sizeCard = function (o) {
       return '<span class="dim mono">' + o.dim + '</span>' +
              '<span class="sub">' + o.sub + '</span>' +
-             '<span class="opt-bar"><span style="width:' + Math.round(o.bar * 100) + '%"></span></span>' +
-             '<span class="price mono">' + (o.price === SIZES[0].price ? '' : '') + fmt(o.price) + '</span>';
-    });
+             '<span class="opt-bar"><span style="width:' + Math.round((o.price / 3215) * 100) + '%"></span></span>' +
+             '<span class="price mono">' + fmt(o.price) + ' · door only</span>';
+    };
+    renderGroup("group-size-res", SIZES.filter(function (o) { return !o.com; }), "size", sizeCard);
+    renderGroup("group-size-com", SIZES.filter(function (o) { return o.com; }), "size", sizeCard);
 
-    renderGroup("group-color", COLORS, "color", function (o) {
-      return '<span class="swatch" style="background:' + o.hex + '"></span>' +
-             '<span class="name">' + o.name + '</span>' +
+    renderGroup("group-insulation", INSULATION, "insulation", function (o) {
+      return '<span class="name">' + o.name + '</span>' +
+             '<span class="desc">' + o.desc + '</span>' +
              '<span class="price mono">' + (o.price ? '+' + fmt(o.price) : 'included') + '</span>';
     });
 
@@ -481,7 +623,13 @@
              '<span class="price mono">' + (o.price ? '+' + fmt(o.price) : 'included') + '</span>';
     });
 
-    renderGroup("group-insulation", INSULATION, "insulation", function (o) {
+    renderGroup("group-color", COLORS, "color", function (o) {
+      return '<span class="swatch" style="background:' + (o.css || o.hex) + '"></span>' +
+             '<span class="name">' + o.name + '</span>' +
+             '<span class="price mono">' + (o.price ? '+' + fmt(o.price) : 'included') + '</span>';
+    });
+
+    renderGroup("group-track", TRACK, "track", function (o) {
       return '<span class="name">' + o.name + '</span>' +
              '<span class="desc">' + o.desc + '</span>' +
              '<span class="price mono">' + (o.price ? '+' + fmt(o.price) : 'included') + '</span>';
@@ -490,7 +638,7 @@
     renderGroup("group-opener", OPENERS, "opener", function (o) {
       return '<span class="name">' + o.name + '</span>' +
              '<span class="desc">' + o.desc + '</span>' +
-             '<span class="price mono">' + (o.price ? '+' + fmt(o.price) : 'included') + '</span>';
+             '<span class="price mono">' + (o.price ? (o.from ? 'from +' : '+') + fmt(o.price) : 'included') + '</span>';
     });
   }
 
@@ -514,22 +662,16 @@
     s += '<rect x="0" y="0" width="100" height="34" fill="none"/>';
     if (id === "none") {
       s += '<rect x="4" y="6" width="92" height="22" rx="1" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-dasharray="3 3"/>';
-    } else if (id === "standard") {
+    } else if (id === "short") {
       for (var i = 0; i < 4; i++) {
         var x = 8 + i * 22;
         s += '<rect x="' + x + '" y="9" width="14" height="16" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>';
       }
-    } else if (id === "arched") {
-      for (var j = 0; j < 4; j++) {
-        var ax = 8 + j * 22;
-        s += '<path d="M' + ax + ' 25 V14 A7 7 0 0 1 ' + (ax + 14) + ' 14 V25 Z" fill="none" stroke="currentColor" stroke-width="2"/>';
-      }
-    } else if (id === "sunburst") {
-      s += '<path d="M20 28 A30 30 0 0 1 80 28 Z" fill="none" stroke="currentColor" stroke-width="2"/>';
-      for (var k = 0; k <= 6; k++) {
-        var ang = Math.PI * (1 - k / 6);
-        var x2 = 50 + 29 * Math.cos(ang), y2 = 28 - 29 * Math.sin(ang);
-        s += '<line x1="50" y1="28" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" stroke="currentColor" stroke-width="1"/>';
+    } else if (id === "long") {
+      for (var j = 0; j < 2; j++) {
+        var lx = 8 + j * 44;
+        s += '<rect x="' + lx + '" y="9" width="40" height="16" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>';
+        s += '<line x1="' + (lx + 20) + '" y1="9" x2="' + (lx + 20) + '" y2="25" stroke="currentColor" stroke-width="1.5"/>';
       }
     }
     s += '</svg>';
@@ -539,8 +681,9 @@
   function renderDoor() {
     var size = byId(SIZES, state.size);
     var color = byId(COLORS, state.color);
-    var W = size.width, H = 240;
-    var doorX = (640 - W) / 2, doorY = 128;
+    var scale = Math.min(26, 320 / size.h, 560 / size.w);
+    var W = size.w * scale, H = size.h * scale;
+    var doorX = (640 - W) / 2, doorY = 388 - H;
     var svg = document.getElementById("doorSvg");
 
     var out = '<defs>' +
@@ -552,45 +695,46 @@
     out += '<rect x="0" y="0" width="640" height="460" fill="url(#siding)"/>';
     out += '<rect x="0" y="410" width="640" height="50" fill="var(--frame)" opacity="0.18"/>';
 
-    var railY = doorY - 34;
-    var railColor = "var(--steel)";
-    out += '<line x1="' + (doorX - 40) + '" y1="' + railY + '" x2="' + (doorX + W + 40) + '" y2="' + railY + '" stroke="' + railColor + '" stroke-width="3" stroke-dasharray="' + (state.opener === "none" ? "5 5" : "0") + '" opacity="0.7"/>';
+    var railY = Math.max(18, doorY - 34);
+    out += '<line x1="' + (doorX - 40) + '" y1="' + railY + '" x2="' + (doorX + W + 40) + '" y2="' + railY + '" stroke="var(--steel)" stroke-width="3" stroke-dasharray="' + (state.opener === "none" ? "5 5" : "0") + '" opacity="0.7"/>';
     if (state.opener !== "none") {
       var trolleyX = doorX + W / 2;
       out += '<rect x="' + (trolleyX - 22) + '" y="' + (railY - 6) + '" width="44" height="12" rx="2" fill="var(--ink)" opacity="0.85"/>';
-      if (state.opener === "chain") {
-        out += '<line x1="' + (doorX - 40) + '" y1="' + railY + '" x2="' + (doorX + W + 40) + '" y2="' + railY + '" stroke="var(--ink)" stroke-width="2" stroke-dasharray="2 3" opacity="0.6"/>';
-      }
-      if (state.opener === "smart") {
-        out += '<circle cx="' + (trolleyX + 30) + '" cy="' + (railY - 2) + '" r="3" fill="none" stroke="var(--oxide)" stroke-width="1.4"/>';
-        out += '<circle cx="' + (trolleyX + 30) + '" cy="' + (railY - 2) + '" r="7" fill="none" stroke="var(--oxide)" stroke-width="1.2" opacity="0.7"/>';
-        out += '<circle cx="' + (trolleyX + 30) + '" cy="' + (railY - 2) + '" r="11" fill="none" stroke="var(--oxide)" stroke-width="1" opacity="0.4"/>';
-      }
     }
 
     out += '<rect x="' + (doorX - 14) + '" y="' + (doorY - 14) + '" width="' + (W + 28) + '" height="' + (H + 20) + '" fill="none" stroke="var(--frame)" stroke-width="10"/>';
     out += '<rect x="' + (doorX - 14) + '" y="' + (doorY - 14) + '" width="' + (W + 28) + '" height="' + (H + 20) + '" fill="none" stroke="var(--door-shadow)" stroke-width="1"/>';
 
-    var rows = 4, rowH = H / rows;
-    for (var i = 0; i < rows; i++) {
-      var ry = doorY + i * rowH;
-      out += '<rect x="' + doorX + '" y="' + ry + '" width="' + W + '" height="' + (rowH - 3) + '" fill="' + color.hex + '" stroke="var(--door-shadow)" stroke-width="1"/>';
-      out += '<rect x="' + doorX + '" y="' + ry + '" width="' + W + '" height="4" fill="#ffffff" opacity="0.12"/>';
-      out += '<rect x="' + doorX + '" y="' + (ry + rowH - 7) + '" width="' + W + '" height="4" fill="#000000" opacity="0.10"/>';
+    if (size.rollup) {
+      out += '<rect x="' + (doorX - 10) + '" y="' + (doorY - 32) + '" width="' + (W + 20) + '" height="24" rx="12" fill="var(--steel)" opacity="0.85"/>';
+      var slats = Math.max(10, Math.round(H / 9));
+      var slatH = H / slats;
+      for (var s = 0; s < slats; s++) {
+        var sy = doorY + s * slatH;
+        out += '<rect x="' + doorX + '" y="' + sy + '" width="' + W + '" height="' + (slatH - 1.2) + '" fill="' + color.hex + '" stroke="var(--door-shadow)" stroke-width="0.6"/>';
+      }
+    } else {
+      var rows = size.h <= 8 ? 4 : (size.h <= 10 ? 5 : 7);
+      var rowH = H / rows;
+      for (var i = 0; i < rows; i++) {
+        var ry = doorY + i * rowH;
+        out += '<rect x="' + doorX + '" y="' + ry + '" width="' + W + '" height="' + (rowH - 3) + '" fill="' + color.hex + '" stroke="var(--door-shadow)" stroke-width="1"/>';
+        out += '<rect x="' + doorX + '" y="' + ry + '" width="' + W + '" height="4" fill="#ffffff" opacity="0.12"/>';
+        out += '<rect x="' + doorX + '" y="' + (ry + rowH - 7) + '" width="' + W + '" height="4" fill="#000000" opacity="0.10"/>';
+      }
+      out += windowsOnDoor(state.windows, doorX, doorY, W, rowH);
     }
-
-    out += windowsOnDoor(state.windows, doorX, doorY, W, rowH, color);
 
     svg.innerHTML = out;
   }
 
-  function windowsOnDoor(style, doorX, doorY, W, rowH, color) {
+  function windowsOnDoor(style, doorX, doorY, W, rowH) {
     var glassFill = "rgba(210,226,232,0.55)";
     var frame = "#2a2b2c";
     var out = "";
     if (style === "none") return out;
 
-    if (style === "standard") {
+    if (style === "short") {
       var count = Math.max(3, Math.round(W / 90));
       var winW = 34, gap = (W - count * winW) / (count + 1);
       for (var i = 0; i < count; i++) {
@@ -599,24 +743,14 @@
         out += '<rect x="' + x + '" y="' + y + '" width="' + winW + '" height="' + (rowH * 0.6) + '" fill="' + glassFill + '" stroke="' + frame + '" stroke-width="2"/>';
         out += '<line x1="' + (x + winW / 2) + '" y1="' + y + '" x2="' + (x + winW / 2) + '" y2="' + (y + rowH * 0.6) + '" stroke="' + frame + '" stroke-width="1.5"/>';
       }
-    } else if (style === "arched") {
-      var c2 = Math.max(3, Math.round(W / 90));
-      var w2 = 34, g2 = (W - c2 * w2) / (c2 + 1);
+    } else if (style === "long") {
+      var c2 = Math.max(2, Math.round(W / 130));
+      var w2 = Math.min(96, (W * 0.8) / c2), g2 = (W - c2 * w2) / (c2 + 1);
       for (var j = 0; j < c2; j++) {
         var x2 = doorX + g2 + j * (w2 + g2);
-        var yBot = doorY + rowH * 0.82;
-        var yTop = doorY + rowH * 0.24;
-        var r = w2 / 2;
-        out += '<path d="M' + x2 + ' ' + yBot + ' V' + (yTop + r) + ' A' + r + ' ' + r + ' 0 0 1 ' + (x2 + w2) + ' ' + (yTop + r) + ' V' + yBot + ' Z" fill="' + glassFill + '" stroke="' + frame + '" stroke-width="2"/>';
-        out += '<line x1="' + (x2 + w2 / 2) + '" y1="' + yTop + '" x2="' + (x2 + w2 / 2) + '" y2="' + yBot + '" stroke="' + frame + '" stroke-width="1.5"/>';
-      }
-    } else if (style === "sunburst") {
-      var cx = doorX + W / 2, cy = doorY + rowH * 0.92, R = Math.min(70, W * 0.22);
-      out += '<path d="M' + (cx - R) + ' ' + cy + ' A' + R + ' ' + R + ' 0 0 1 ' + (cx + R) + ' ' + cy + ' Z" fill="' + glassFill + '" stroke="' + frame + '" stroke-width="2.5"/>';
-      for (var k = 0; k <= 6; k++) {
-        var ang = Math.PI * (1 - k / 6);
-        var ex = cx + (R - 3) * Math.cos(ang), ey = cy - (R - 3) * Math.sin(ang);
-        out += '<line x1="' + cx + '" y1="' + cy + '" x2="' + ex.toFixed(1) + '" y2="' + ey.toFixed(1) + '" stroke="' + frame + '" stroke-width="1.4"/>';
+        var y2 = doorY + rowH * 0.22;
+        out += '<rect x="' + x2 + '" y="' + y2 + '" width="' + w2 + '" height="' + (rowH * 0.56) + '" fill="' + glassFill + '" stroke="' + frame + '" stroke-width="2"/>';
+        out += '<line x1="' + (x2 + w2 / 2) + '" y1="' + y2 + '" x2="' + (x2 + w2 / 2) + '" y2="' + (y2 + rowH * 0.56) + '" stroke="' + frame + '" stroke-width="1.5"/>';
       }
     }
     return out;
@@ -625,38 +759,41 @@
   function renderCutaway() {
     var ins = byId(INSULATION, state.insulation);
     var svg = document.getElementById("cutawaySvg");
-    var coreW = ins.id === "none" ? 4 : (ins.id === "r9" ? 20 : 34);
+    var coreW = ins.id === "none" ? 4 : (ins.id === "vinyl" ? 20 : 30);
     var out = '<rect x="2" y="6" width="' + (coreW + 12) + '" height="46" fill="none"/>';
     out += '<rect x="10" y="8" width="4" height="42" fill="var(--ink)"/>';
-    out += '<rect x="' + (14 + coreW) + '" y="8" width="4" height="42" fill="var(--ink)"/>';
+    out += '<rect x="' + (14 + coreW) + '" y="8" width="' + (ins.id === "steel" ? 4 : 2.5) + '" height="42" fill="var(--ink)"' + (ins.id === "vinyl" ? ' opacity="0.55"' : '') + '/>';
     if (ins.id === "none") {
       out += '<line x1="14" y1="8" x2="18" y2="50" stroke="var(--line-strong)" stroke-width="1"/>';
     } else {
-      var fill = ins.id === "r9" ? "var(--wall-line)" : "var(--oxide)";
-      var op = ins.id === "r9" ? 1 : 0.35;
+      var fill = ins.id === "vinyl" ? "var(--wall-line)" : "var(--oxide)";
+      var op = ins.id === "vinyl" ? 1 : 0.35;
       out += '<rect x="14" y="8" width="' + coreW + '" height="42" fill="' + fill + '" opacity="' + op + '"/>';
       for (var y = 12; y < 50; y += 6) {
         out += '<path d="M14 ' + y + ' q' + (coreW / 4) + ' -5 ' + (coreW / 2) + ' 0 t' + (coreW / 2) + ' 0" fill="none" stroke="var(--ink)" stroke-opacity="0.25" stroke-width="1"/>';
       }
     }
-    out += '<text x="' + (14 + coreW + 14) + '" y="24" font-size="9" fill="var(--ink-soft)" font-family="ui-monospace, monospace">' + (ins.id === "none" ? "STEEL" : "STEEL") + '</text>';
+    out += '<text x="' + (14 + coreW + 14) + '" y="24" font-size="9" fill="var(--ink-soft)" font-family="ui-monospace, monospace">' + (ins.id === "none" ? "STEEL" : (ins.id === "vinyl" ? "VINYL" : "STEEL")) + '</text>';
     out += '<text x="' + (14 + coreW + 14) + '" y="38" font-size="9" fill="var(--ink-soft)" font-family="ui-monospace, monospace">' + (ins.id === "none" ? "SKIN" : "+ CORE") + '</text>';
     svg.innerHTML = out;
   }
 
   function renderSummary() {
     var size = byId(SIZES, state.size);
-    var color = byId(COLORS, state.color);
-    var win = byId(WINDOWS, state.windows);
     var ins = byId(INSULATION, state.insulation);
+    var win = byId(WINDOWS, state.windows);
+    var color = byId(COLORS, state.color);
+    var track = byId(TRACK, state.track);
     var op = byId(OPENERS, state.opener);
 
     var lines = [
       { label: size.dim + " door (" + size.sub + ")", amt: size.price },
+      { label: ins.id === "none" ? "Non-insulated construction" : ins.name + " insulation", amt: ins.price },
+      { label: win.id === "none" ? "No windows" : win.name + " windows", amt: win.price },
       { label: color.name + " finish", amt: color.price },
-      { label: win.name + " windows", amt: win.price },
-      { label: ins.name + " insulation", amt: ins.price },
-      { label: op.name + " opener", amt: op.price }
+      { label: track.name + " track", amt: track.price },
+      { label: op.id === "none" ? "No opener work" : "Opener installation", amt: op.price, from: op.from },
+      { label: "Installation · " + size.laborLabel, amt: size.labor, from: size.laborFrom }
     ];
     var total = lines.reduce(function (s, l) { return s + l.amt; }, 0);
 
@@ -664,19 +801,20 @@
     document.getElementById("insulLabel").textContent = ins.label;
 
     document.getElementById("pick-size").textContent = size.dim;
-    document.getElementById("pick-color").textContent = color.name;
-    document.getElementById("pick-windows").textContent = win.name;
     document.getElementById("pick-insulation").textContent = ins.name;
+    document.getElementById("pick-windows").textContent = win.name;
+    document.getElementById("pick-color").textContent = color.name;
+    document.getElementById("pick-track").textContent = track.name;
     document.getElementById("pick-opener").textContent = op.name;
 
     var bd = document.getElementById("breakdownList");
     bd.innerHTML = lines.map(function (l) {
-      return '<div class="breakdown-row"><span>' + l.label + '</span><span class="amt mono">' + (l.amt ? "+" + fmt(l.amt) : "included") + '</span></div>';
+      return '<div class="breakdown-row"><span>' + l.label + '</span><span class="amt mono">' + (l.amt ? (l.from ? "from +" : "+") + fmt(l.amt) : "included") + '</span></div>';
     }).join("") +
-      '<div class="breakdown-row"><span><strong>Estimated total</strong></span><span class="amt mono">' + fmt(total) + '</span></div>' +
-      '<div class="breakdown-note">Estimate only. Final price is confirmed on a free in-home measure — spring type, drywall/framing, and old-door haul-away can change the quote.</div>';
+      '<div class="breakdown-row"><span><strong>Estimated total, installed</strong></span><span class="amt mono">' + fmt(total) + '</span></div>' +
+      '<div class="breakdown-note">Estimate only — installation is shown at its starting rate ($650 single car · from $750 double/oversize · from $1,000 commercial). Final price is confirmed on a free measure: spring type, headroom, framing, and old-door haul-away can change the quote. In-stock specials in the list below may beat this estimate.</div>';
 
-    var msg = "Hi Viking Garage Door — I built a door on your site: " + size.dim + ", " + color.name + ", " + win.name + " windows, " + ins.name + " insulation, " + op.name + " opener. Estimated total " + fmt(total) + ". Can you confirm pricing and a time to measure?";
+    var msg = "Hi Viking Garage Door — I built a door on your site: " + size.dim + ", " + ins.name + ", " + (win.id === "none" ? "no windows" : win.name + " windows") + ", " + color.name + ", " + track.name + " track, " + (op.id === "none" ? "no opener work" : "opener installation") + ". Estimated total installed " + fmt(total) + ". Can you confirm pricing and a time to measure?";
     document.getElementById("smsLink").href = "sms:+18649217373&body=" + encodeURIComponent(msg);
   }
 
