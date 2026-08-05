@@ -101,6 +101,161 @@
       "first_contacted": "2026-02-26",
       "status": "contacted",
       "notes": "No reply."
+    },
+
+    {
+      "company": "Estep Builders",
+      "type": "builder",
+      "city": "Spartanburg / Greenville / Cherokee County",
+      "email": null,
+      "phone": "864-597-9055",
+      "website": "estepbuilders.com",
+      "status": "new",
+      "notes": "Markets 'Custom Homes & Garages' - closest product overlap of any candidate. Email not yet verified."
+    },
+    {
+      "company": "Meritus Signature Homes",
+      "type": "builder",
+      "city": "Spartanburg + Greenville",
+      "email": null,
+      "phone": "864-261-7699",
+      "website": "meritushomes.com",
+      "status": "new",
+      "notes": "Stated service area nearly identical to Viking's: Boiling Springs, Inman, Woodruff, Duncan, Lyman, Wellford. Fixed-price model means they need firm sub quotes. Email not yet verified."
+    },
+    {
+      "company": "DRS Custom Homes",
+      "type": "builder",
+      "city": "Fountain Inn / Simpsonville",
+      "email": null,
+      "phone": "864-444-2948",
+      "website": "drscustomhomesllc.com",
+      "status": "new",
+      "notes": "Site headline includes 'Garage Additions'. Email not yet verified."
+    },
+    {
+      "company": "Riggs Custom Builders",
+      "type": "builder",
+      "city": "Greenville",
+      "email": null,
+      "website": "riggsbuilders.com",
+      "status": "new",
+      "notes": "17+ yrs locally owned; markets established subcontractor relationships. Email not yet verified."
+    },
+    {
+      "company": "Nunley Custom Homes",
+      "type": "builder",
+      "city": "Greenville / Upstate",
+      "email": null,
+      "phone": "864-380-0724",
+      "website": "nunleycustomhomes.net",
+      "status": "new",
+      "notes": "Luxury custom + high-end remodel - upgraded door specs. Email not yet verified."
+    },
+    {
+      "company": "Marchant Property Management",
+      "type": "property_mgmt",
+      "city": "Greenville, Greer, Mauldin, Simpsonville, Taylors, Easley, Travelers Rest",
+      "email": null,
+      "website": "marchantpm.com",
+      "status": "new",
+      "notes": "Since 1995, thousands of single/multi-family units - likely the highest repair work-order volume of any candidate. Email not yet verified."
+    },
+    {
+      "company": "Spencer/Hines Property Management",
+      "type": "property_mgmt",
+      "city": "Spartanburg",
+      "email": null,
+      "phone": "864-573-7273",
+      "website": "spencerhinespm.com",
+      "status": "new",
+      "notes": "Large established Spartanburg portfolio; 101 N Pine St Ste 350. Email not yet verified - note the sister brokerage uses a different domain, so confirm before sending."
+    },
+    {
+      "company": "Dwell Property Management",
+      "type": "property_mgmt",
+      "city": "Greenville, Taylors, Travelers Rest, Simpsonville, Greer, Mauldin",
+      "email": null,
+      "phone": "864-664-2589",
+      "website": "dwellproperty.co",
+      "status": "new",
+      "notes": "Upstate-only footprint matching the service area. Email not yet verified."
+    },
+    {
+      "company": "HOA Management Services",
+      "type": "hoa_mgmt",
+      "city": "Spartanburg",
+      "email": null,
+      "phone": "864-553-4056",
+      "website": "hoamgmtservices.com",
+      "status": "new",
+      "notes": "Locally headquartered (1218 John B White Sr Blvd Ste F), not a national franchise. Email not yet verified."
+    },
+    {
+      "company": "Goodwin Property Management",
+      "type": "property_mgmt",
+      "city": "Spartanburg",
+      "email": null,
+      "website": "goodwinpm.com",
+      "status": "new",
+      "notes": "Spartanburg-based residential manager. Email not yet verified."
+    },
+    {
+      "company": "Red Door Leasing",
+      "type": "property_mgmt",
+      "city": "Duncan",
+      "email": null,
+      "phone": "864-336-5033",
+      "website": "reddoorleasingsc.com",
+      "status": "new",
+      "notes": "Based in Duncan, inside the service area. Email not yet verified."
+    },
+    {
+      "company": "Pepperwood Property Management",
+      "type": "property_mgmt",
+      "city": "Spartanburg",
+      "email": null,
+      "phone": "864-586-1555",
+      "website": "pepperwoodpm.com",
+      "status": "new",
+      "notes": "Spartanburg residential. Email not yet verified."
+    },
+    {
+      "company": "Community Management Partners LLC",
+      "type": "hoa_mgmt",
+      "city": "Mauldin / Greenville",
+      "email": null,
+      "website": "hoapartner.com",
+      "status": "new",
+      "notes": "Local Mauldin-based HOA manager. Email not yet verified."
+    },
+    {
+      "company": "CEF&CO",
+      "type": "property_mgmt",
+      "city": "Spartanburg",
+      "email": null,
+      "website": "cefco.net",
+      "status": "new",
+      "notes": "853 John B White Sr Blvd, Spartanburg. Email not yet verified."
     }
-  ]
+  ],
+
+  "deprioritized": {
+    "_comment": "National/franchise operations with rigid procurement portals - low cold-email response rate.",
+    "companies": ["Schumacher Homes", "America's Home Place", "Build On Your Land", "PMI Southern States/Upstate", "Cedar Management Group", "William Douglas PMC", "Red Rock Management"]
+  },
+
+  "outreach_template": {
+    "_comment": "Template that earned a same-day reply from Acumen Builders on 2026-07-29. Personalize the city in the subject line and the geography line in the body.",
+    "subject": "Garage door sub for your {CITY} builds - local, from $1,950 installed",
+    "body": "Hi {NAME},\n\nI'm Taras, owner of Viking Garage Door in Boiling Springs. We install and service garage doors across Spartanburg and Greenville counties, and I'd like to earn a spot as your garage door sub.\n\nWhy builders work with us:\n\n- Turnkey install from $1,950 per door; volume pricing on multi-door orders\n- We follow your construction schedule - measure early, install on your date, no holdups before closing\n- Licensed and insured, 4.8-star Google rating; recent installs: https://www.vikingdoor.net/garage-doors/\n- After closing, your buyers call us for warranty and service - not you\n\n{CITY} is an easy run for us. Happy to price out your next build - I can meet at the job.\n\nTaras\nViking Garage Door LLC - Boiling Springs, SC 29316\n(864) 921-7373 - vikingdoor.net\n\nP.S. Not the right person or don't want these emails? Reply \"pass\" and I won't email again."
+  },
+
+  "blocked_2026_08_05": {
+    "_comment": "This run could not send. The sandbox network policy denied outbound HTTPS to every external host (403 on CONNECT), so no email address could be confirmed on any company website. No proposals were sent rather than mailing pattern-guessed addresses, which risk bounces and hurt sender reputation.",
+    "best_sources_when_unblocked": [
+      "members.hbaofgreenville.com/directory - ~600 HBA members across Greenville/Pickens/Laurens, published contact details",
+      "OneSpartanburg chamber contractor directory"
+    ]
+  }
 }
