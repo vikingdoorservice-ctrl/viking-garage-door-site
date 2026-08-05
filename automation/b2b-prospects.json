@@ -1,0 +1,106 @@
+{
+  "_comment": "B2B outreach log for Viking Garage Door LLC. Check this before sending new proposals so prospects are never contacted twice. Status: new | contacted | replied | quoted | customer | bounced | pass",
+  "sender": "vikingdoorservice@gmail.com",
+  "last_run": "2026-08-05",
+  "prospects": [
+    {
+      "company": "Acumen Builders",
+      "type": "builder",
+      "city": "Taylors, SC",
+      "email": "info@acumenbuilders.com",
+      "contact": "Lana Henderson, Administrative Assistant",
+      "phone": "864-630-1344",
+      "first_contacted": "2026-07-29",
+      "status": "quoted",
+      "notes": "HOT. Replied same day asking for a quote. Quoted 16x7 black: $3,360 insulated sandwich / $2,840 alternate vinyl-backed long panel. Asked for white on 2026-08-03; answered same price. Awaiting decision - follow up if no word by 2026-08-08."
+    },
+    {
+      "company": "Keystone Construction",
+      "type": "builder",
+      "city": "Upstate SC",
+      "email": "crystal@keystoneconstruction.com",
+      "contact": "Crystal",
+      "first_contacted": "2026-02-15",
+      "status": "replied",
+      "notes": "Said they would reach out about pricing on their next house. No contact since February - warm re-engagement candidate. NOTE: first attempt bounced due to typo '.con' - correct domain is keystoneconstruction.com."
+    },
+    {
+      "company": "FSBR Carolinas",
+      "type": "gc",
+      "city": "Upstate SC",
+      "email": "nick@fsbrcarolinas.com",
+      "contact": "Nick; John (john@fsbrcarolinas.com) handles jobs",
+      "first_contacted": "2026-02-03",
+      "status": "customer",
+      "notes": "Converted. Sent the Travis Kay job on 2026-06-09. Existing relationship - do not cold email."
+    },
+    {
+      "company": "SC Home Showcase",
+      "type": "builder",
+      "city": "SC",
+      "email": "schomeshowcase@gmail.com",
+      "contact": "Lance Deloria",
+      "first_contacted": "2026-02-16",
+      "status": "replied",
+      "notes": "Inbound request for price list. Full builder proposal sent 2026-02-17."
+    },
+    {
+      "company": "Sain Homes",
+      "type": "builder",
+      "city": "Travelers Rest, SC",
+      "email": "hello@sainhomes.com",
+      "contact": "Matt",
+      "first_contacted": "2026-07-29",
+      "status": "contacted",
+      "notes": "No reply."
+    },
+    {
+      "company": "Red Oak Developers",
+      "type": "builder",
+      "city": "Upstate SC",
+      "email": "info@redoakdevelopers.com",
+      "contact": "Bradley",
+      "first_contacted": "2026-07-29",
+      "status": "contacted",
+      "notes": "No reply."
+    },
+    {
+      "company": "Dream Finders Homes",
+      "type": "builder",
+      "city": "Greenville, SC",
+      "email": "nathan.rutter@dreamfindershomes.com",
+      "contact": "Nathan Rutter",
+      "first_contacted": "2026-06-07",
+      "status": "contacted",
+      "notes": "Referred by Bill Gulledge. No reply."
+    },
+    {
+      "company": "DRB Group",
+      "type": "builder",
+      "city": "Greenville, SC",
+      "email": "gsnipes@drbgroup.com",
+      "contact": "Grayson Snipes",
+      "first_contacted": "2026-02-16",
+      "status": "contacted",
+      "notes": "Vendor application. No reply."
+    },
+    {
+      "company": "Southern Grace Builders",
+      "type": "builder",
+      "city": "SC",
+      "email": "southerngracebuilders@gmail.com",
+      "first_contacted": "2026-05-11",
+      "status": "contacted",
+      "notes": "No reply."
+    },
+    {
+      "company": "American Homes Remodel",
+      "type": "gc",
+      "city": "Boiling Springs / Spartanburg, SC",
+      "email": "americanhomesremodel@gmail.com",
+      "first_contacted": "2026-02-26",
+      "status": "contacted",
+      "notes": "No reply."
+    }
+  ]
+}
