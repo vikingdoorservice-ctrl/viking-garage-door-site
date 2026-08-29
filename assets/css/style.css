@@ -556,3 +556,17 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--orange); bo
   .footer-grid { grid-template-columns: 1fr; }
   .section { padding: 54px 0; }
 }
+
+/* --- 2026-08-29 SEO/UX pass: prevent header overflow on 1000-1400px laptops --- */
+@media (min-width: 900px) and (max-width: 1400px) {
+  .header-inner { gap: 14px; }
+  .site-nav { gap: 14px; }
+  .site-nav a { font-size: 0.9rem; letter-spacing: 0.03em; }
+  .header-phone { padding-left: 16px; padding-right: 16px; font-size: 0.95rem; }
+  .brand-name { font-size: 1.25rem; }
+  .brand-name small { letter-spacing: 0.18em; }
+}
+.header-inner { flex-wrap: nowrap; min-width: 0; }
+.brand { flex: 0 1 auto; min-width: 0; }
+.header-phone { flex: 0 0 auto; white-space: nowrap; }
+html, body { overflow-x: hidden; }
