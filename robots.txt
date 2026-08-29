@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Legacy Wix paths are redirect stubs (noindex, follow + 0s meta refresh).
+# They must stay crawlable — that is how Google drops the old URLs.
+
 Sitemap: https://www.vikingdoor.net/sitemap.xml
