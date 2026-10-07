@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1220 628" font-family="Arial,Helvetica,sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs>
+<rect width="100%" height="100%" fill="#fff"/>
+<text x="150" y="30" font-size="22" font-weight="700" fill="#111">16' × 8' Solid Flush</text>
+<text x="150" y="54" font-size="14" fill="#555">Front view (outside). Dimensions in inches (mm). Black Matt RAL 9004.</text>
+<rect x="150" y="434.2" width="900" height="84.2" fill="#262626" stroke="#888" stroke-width="1.5"/>
+<text x="140" y="481.3" font-size="14" text-anchor="end" fill="#111">18 1/8" (460)</text>
+<rect x="150" y="342.7" width="900" height="91.5" fill="#262626" stroke="#888" stroke-width="1.5"/>
+<text x="140" y="393.5" font-size="14" text-anchor="end" fill="#111">19 5/8" (500)</text>
+<rect x="150" y="251.2" width="900" height="91.5" fill="#262626" stroke="#888" stroke-width="1.5"/>
+<text x="140" y="302.0" font-size="14" text-anchor="end" fill="#111">19 5/8" (500)</text>
+<rect x="150" y="159.7" width="900" height="91.5" fill="#262626" stroke="#888" stroke-width="1.5"/>
+<text x="140" y="210.4" font-size="14" text-anchor="end" fill="#111">19 5/8" (500)</text>
+<rect x="150" y="77.3" width="900" height="82.4" fill="#262626" stroke="#888" stroke-width="1.5"/>
+<text x="140" y="123.5" font-size="14" text-anchor="end" fill="#111">17 3/4" (450)</text>
+<rect x="150" y="518.4" width="900" height="5" fill="#111"/>
+<line x1="150" y1="558.444173276388" x2="1050" y2="558.444173276388" stroke="#111" stroke-width="1.2" marker-start="url(#a)" marker-end="url(#a)"/>
+<text x="600.0" y="552.444173276388" font-size="15" text-anchor="middle" fill="#111">Opening width 16'0" = 192" (4877 mm)</text>
+<line x1="150" y1="603.444173276388" x2="1050" y2="603.444173276388" stroke="#111" stroke-width="1.2" marker-start="url(#a)" marker-end="url(#a)"/>
+<text x="600.0" y="597.444173276388" font-size="15" text-anchor="middle" fill="#111">Panel width 193 5/8" (4917 mm)</text>
+<line x1="1090" y1="71.8" x2="1090" y2="518.4" stroke="#111" stroke-width="1.2" marker-start="url(#a)" marker-end="url(#a)"/>
+<text x="1102" y="295.1" font-size="15" fill="#111" transform="rotate(90 1102 295.1)" text-anchor="middle">Opening height 8'0" = 96" (2440 mm)</text>
+<text x="140" y="64.0" font-size="12" text-anchor="end" fill="#555">Panel 96 1/2"</text>
+</svg>
