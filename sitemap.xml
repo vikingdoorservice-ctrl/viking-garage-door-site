@@ -92,7 +92,7 @@
   </url>
   <url>
     <loc>https://www.vikingdoor.net/gallery/</loc>
-    <lastmod>2026-08-29</lastmod>
+    <lastmod>2026-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -208,5 +208,17 @@
     <loc>https://www.vikingdoor.net/garage-doors/ryterna/</loc>
     <lastmod>2026-10-06</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vikingdoor.net/garage-door-repair-hendersonville-nc/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.vikingdoor.net/garage-door-repair-asheville-nc/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
