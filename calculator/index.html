@@ -453,9 +453,9 @@
 
 <div class="vgd-app">
   <div class="masthead">
-    <div class="eyebrow">Viking Garage Door · Genuine Garaga Doors · Greenville &amp; Spartanburg, SC</div>
-    <h1>Build your Garaga door</h1>
-    <p>We sell and install genuine <strong>Garaga</strong> garage doors — North-American-made steel doors with polyurethane-injected insulation up to R-16. Pick a size, design, insulation, windows, and color; prices come straight from our current stock list, with professional installation added as its own line — then text or call to lock in your exact quote.</p>
+    <div class="eyebrow">Viking Garage Door · Garaga &amp; Amarr Doors · Spartanburg, Greenville &amp; Western NC</div>
+    <h1>Build your garage door — Garaga or Amarr</h1>
+    <p>We sell and install <strong>Garaga</strong> and <strong>Amarr</strong> garage doors. Pick the brand first — Garaga for polyurethane-injected doors up to R-16, Amarr for great-value Lincoln steel doors. Pick a size, design, insulation, windows, color and opener — every price shown is installed — then text or call to lock in your exact quote.</p>
   </div>
 
   <div class="workbench">
@@ -472,11 +472,16 @@
 
     <div class="spec-pane">
 
+      <div class="spec-group" data-group="brand">
+        <div class="spec-group-head"><h2>Brand</h2><span class="picked" id="pick-brand"></span></div>
+        <div class="opt-row grid-3" id="group-brand"></div>
+      </div>
+
       <div class="spec-group" data-group="size">
         <div class="spec-group-head"><h2>Size</h2><span class="picked" id="pick-size"></span></div>
         <div class="size-subhead">Residential</div>
         <div class="opt-row grid-4" id="group-size-res"></div>
-        <div class="size-subhead">Commercial</div>
+        <div class="size-subhead" id="com-subhead">Commercial</div>
         <div class="opt-row grid-4" id="group-size-com"></div>
       </div>
 
@@ -533,7 +538,7 @@
 
   <div class="pricelist">
     <div class="pricelist-head">
-      <h2>Current stock list — installed prices</h2>
+      <h2>Garaga stock list — installed prices</h2>
       <p>Doors we have in stock right now, priced <strong>installed</strong> — door, track, springs, hardware, labor and haul-away of the old door all included. Stock moves fast, so call or text to confirm availability.</p>
     </div>
     <div class="pricelist-grid">
@@ -642,10 +647,92 @@
   ];
   var OPENERS = [
     { id: "none",    name: "Keep existing",      desc: "No opener work",                 price: 0 },
-    { id: "install", name: "Motor installation", desc: "We hang, wire & tune your opener", price: 250, from: true }
+    { id: "install", name: "Install your opener", desc: "We hang, wire & tune your opener", price: 250, from: true },
+    { id: "kwikset", name: "Kwikset FLEX 800",   desc: "Smart belt drive · supplied & installed", byH: { 7: 630, 8: 680, 9: 730 } },
+    { id: "lm6580",  name: "LiftMaster 6580L",   desc: "Belt drive · battery backup · myQ · supplied & installed", byH: { 7: 770, 8: 840, 9: 910 } }
+  ];
+  // Amarr Lincoln — customer installed prices (white, closed). Precomputed; no dealer cost on this page.
+  var A_SIZES = [
+    { id: "a87", w: 8, h: 7, dim: "8′ × 7′", sub: "Single car", price: 1300, ins: { none: 1300, vinyl: 1450, steel: 1790 }, win: { none: 240, vinyl: 300, steel: 270 }, woodgrain: 330 },
+    { id: "a97", w: 9, h: 7, dim: "9′ × 7′", sub: "Single, wide", price: 1340, ins: { none: 1340, vinyl: 1510, steel: 1890 }, win: { none: 240, vinyl: 300, steel: 270 }, woodgrain: 330 },
+    { id: "a88", w: 8, h: 8, dim: "8′ × 8′", sub: "Single, tall", price: 1470, ins: { none: 1470, vinyl: 1660, steel: 2080 }, win: { none: 240, vinyl: 300, steel: 270 }, woodgrain: 330 },
+    { id: "a98", w: 9, h: 8, dim: "9′ × 8′", sub: "Single, wide & tall", price: 1520, ins: { none: 1520, vinyl: 1730, steel: 2220 }, win: { none: 240, vinyl: 300, steel: 270 }, woodgrain: 330 },
+    { id: "a107", w: 10, h: 7, dim: "10′ × 7′", sub: "Single, oversize", price: 1460, ins: { none: 1460, vinyl: 1670, steel: 2070 }, win: { none: 300, vinyl: 380, steel: 340 }, woodgrain: 330 },
+    { id: "a108", w: 10, h: 8, dim: "10′ × 8′", sub: "Oversize, tall", price: 1670, ins: { none: 1670, vinyl: 1940, steel: 2450 }, win: { none: 300, vinyl: 380, steel: 340 }, woodgrain: 330 },
+    { id: "a167", w: 16, h: 7, dim: "16′ × 7′", sub: "Double car", price: 1950, ins: { none: 1950, vinyl: 2310, steel: 2910 }, win: { none: 470, vinyl: 580, steel: 530 }, woodgrain: 640 },
+    { id: "a168", w: 16, h: 8, dim: "16′ × 8′", sub: "Double, tall", price: 2250, ins: { none: 2250, vinyl: 2690, steel: 3530 }, win: { none: 470, vinyl: 580, steel: 530 }, woodgrain: 640 },
+    { id: "a169", w: 16, h: 9, dim: "16′ × 9′", sub: "Double, 9′ tall", price: 2820, ins: { none: 2820, vinyl: 3320, steel: 4330 }, win: { none: 470, vinyl: 580, steel: 530 }, woodgrain: 810 },
+    { id: "a187", w: 18, h: 7, dim: "18′ × 7′", sub: "Double, wide", price: 2260, ins: { none: 2260, vinyl: 2620, steel: 3300 }, win: { none: 470, vinyl: 580, steel: 530 }, woodgrain: 640 },
+    { id: "a188", w: 18, h: 8, dim: "18′ × 8′", sub: "Double, wide & tall", price: 2620, ins: { none: 2620, vinyl: 3090, steel: 3990 }, win: { none: 470, vinyl: 580, steel: 530 }, woodgrain: 640 }
+  ];
+  var A_DESIGN = [
+    { id: "classic", name: "Short panel", desc: "Lincoln raised short panels", price: 0 },
+    { id: "shaker",  name: "Long panel",  desc: "Lincoln raised long panels",  price: 0 },
+    { id: "moderno", name: "Flush",       desc: "Smooth modern sections",      price: 0 }
+  ];
+  var A_INSULATION = [
+    { id: "none",  name: "Non-insulated", model: "Lincoln LI1000", desc: "LI1000 · single 25-ga steel skin",      label: "Lincoln LI1000 · non-insulated" },
+    { id: "vinyl", name: "Vinyl back",    model: "Lincoln LI2000", desc: "LI2000 · polystyrene + vinyl, R-6.64",  label: "Lincoln LI2000 · insulated, R-6.64" },
+    { id: "steel", name: "Steel back",    model: "Lincoln LI3000", desc: "LI3000 · 2\" triple layer, R-9.05",    label: "Lincoln LI3000 · 2\" steel sandwich, R-9.05" }
+  ];
+  var A_WINDOWS = [
+    { id: "none", name: "None",              desc: "Solid top section" },
+    { id: "long", name: "Clear glass row",   desc: "Windows in the top section" }
+  ];
+  var A_COLORS = [
+    { id: "a_white",   name: "True White",     hex: "#f2f1ec", price: 0 },
+    { id: "a_almond",  name: "Almond",         hex: "#e4dcc8", price: 25 },
+    { id: "a_sand",    name: "Sandtone",       hex: "#cdbb98", price: 25 },
+    { id: "a_brown",   name: "Dark Brown",     hex: "#4a3a2c", price: 25 },
+    { id: "a_charcoal",name: "Charcoal Gray",  hex: "#3a3d40", price: 25 },
+    { id: "a_black",   name: "Black",          hex: "#1e1f21", price: 25 },
+    { id: "a_walnut",  name: "Walnut woodgrain", hex: "#6b4a33", css: "linear-gradient(90deg,#6b4a33,#7d5a3f 30%,#5c3e2a 62%,#75543a)", wood: true }
+  ];
+  var A_TRACK = [
+    { id: "std",  name: "Standard lift", desc: "Normal headroom track", price: 0 },
+    { id: "high", name: "High-lift",     desc: "For tall ceilings", price: 0, note: "priced on quote" }
+  ];
+  var BRANDS = [
+    { id: "garaga", name: "Garaga", desc: "Polyurethane-injected · up to R-16 · stock list" },
+    { id: "amarr",  name: "Amarr",  desc: "Lincoln steel doors · great value · made to order" }
   ];
 
-  var state = { size: "r167", design: "classic", insulation: "none", windows: "none", color: "icewhite", track: "std", opener: "none" };
+
+  var state = { brand: "garaga", size: "r167", design: "classic", insulation: "none", windows: "none", color: "icewhite", track: "std", opener: "none" };
+  var isA = function () { return state.brand === "amarr"; };
+  var curSize = function () { return byId(isA() ? A_SIZES : SIZES, state.size); };
+  function L(name) {
+    var s = curSize();
+    if (name === "sizes") return isA() ? A_SIZES : SIZES;
+    if (name === "design") return isA() ? A_DESIGN : DESIGN;
+    if (name === "track") return isA() ? A_TRACK : TRACK;
+    if (name === "insulation") {
+      if (!isA()) return INSULATION;
+      return A_INSULATION.map(function (o) { return Object.assign({}, o, { price: s.ins[o.id] - s.ins.none }); });
+    }
+    if (name === "windows") {
+      if (!isA()) return WINDOWS;
+      return A_WINDOWS.map(function (o) { return Object.assign({}, o, { price: o.id === "none" ? 0 : s.win[state.insulation] }); });
+    }
+    if (name === "color") {
+      if (!isA()) return COLORS;
+      return A_COLORS.map(function (o) { return o.wood ? Object.assign({}, o, { price: s.woodgrain }) : o; });
+    }
+    if (name === "opener") {
+      var hh = Math.min(9, Math.max(7, Math.round(s.h || 7)));
+      return OPENERS.map(function (o) { return o.byH ? Object.assign({}, o, { price: o.byH[hh] }) : o; });
+    }
+  }
+  function normalize() {
+    var fix = function (list, key, def) { if (!byId(list, state[key])) state[key] = def; };
+    var twin = (isA() ? "a" : "r") + String(state.size).slice(1);
+    if (!byId(L("sizes"), state.size) && byId(L("sizes"), twin)) state.size = twin;
+    fix(L("sizes"), "size", isA() ? "a167" : "r167");
+    fix(L("design"), "design", "classic");
+    fix(L("windows"), "windows", "none");
+    fix(L("color"), "color", isA() ? "a_white" : "icewhite");
+    fix(L("track"), "track", "std");
+  }
   var byId = function (list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i]; };
 
   function buildOptionGroups() {
@@ -653,43 +740,49 @@
       return '<span class="dim mono">' + o.dim + '</span>' +
              '<span class="sub">' + o.sub + '</span>' +
              '<span class="opt-bar"><span style="width:' + Math.round((o.price / 3215) * 100) + '%"></span></span>' +
-             '<span class="price mono">' + fmt(o.price) + ' · door only</span>';
+             '<span class="price mono">' + (isA() ? 'from ' : '') + fmt(o.price) + ' · installed</span>';
     };
-    renderGroup("group-size-res", SIZES.filter(function (o) { return !o.com; }), "size", sizeCard);
-    renderGroup("group-size-com", SIZES.filter(function (o) { return o.com; }), "size", sizeCard);
+    renderGroup("group-brand", BRANDS, "brand", function (o) {
+      return '<span class="name">' + o.name + '</span>' +
+             '<span class="desc">' + o.desc + '</span>';
+    });
+    renderGroup("group-size-res", L("sizes").filter(function (o) { return !o.com; }), "size", sizeCard);
+    renderGroup("group-size-com", L("sizes").filter(function (o) { return o.com; }), "size", sizeCard);
+    document.getElementById("com-subhead").style.display = isA() ? "none" : "";
+    document.getElementById("group-size-com").style.display = isA() ? "none" : "";
 
-    renderGroup("group-design", DESIGN, "design", function (o) {
+    renderGroup("group-design", L("design"), "design", function (o) {
       return '<span class="opt-icon">' + designIcon(o.id) + '</span>' +
              '<span class="name">' + o.name + '</span>' +
              '<span class="desc">' + o.desc + '</span>' +
              '<span class="price mono">' + (o.note ? o.note : 'included') + '</span>';
     });
 
-    renderGroup("group-insulation", INSULATION, "insulation", function (o) {
+    renderGroup("group-insulation", L("insulation"), "insulation", function (o) {
       return '<span class="name">' + o.name + '</span>' +
              '<span class="desc">' + o.desc + '</span>' +
              '<span class="price mono">' + (o.price ? '+' + fmt(o.price) : 'included') + '</span>';
     });
 
-    renderGroup("group-windows", WINDOWS, "windows", function (o) {
+    renderGroup("group-windows", L("windows"), "windows", function (o) {
       return '<span class="opt-icon">' + windowIcon(o.id) + '</span>' +
              '<span class="name">' + o.name + '</span>' +
              '<span class="price mono">' + (o.price ? '+' + fmt(o.price) : 'included') + '</span>';
     });
 
-    renderGroup("group-color", COLORS, "color", function (o) {
+    renderGroup("group-color", L("color"), "color", function (o) {
       return '<span class="swatch" style="background:' + (o.css || o.hex) + '"></span>' +
              '<span class="name">' + o.name + '</span>' +
              '<span class="price mono">' + (o.price ? '+' + fmt(o.price) : 'included') + '</span>';
     });
 
-    renderGroup("group-track", TRACK, "track", function (o) {
+    renderGroup("group-track", L("track"), "track", function (o) {
       return '<span class="name">' + o.name + '</span>' +
              '<span class="desc">' + o.desc + '</span>' +
-             '<span class="price mono">' + (o.price ? '+' + fmt(o.price) : 'included') + '</span>';
+             '<span class="price mono">' + (o.note ? o.note : (o.price ? '+' + fmt(o.price) : 'included')) + '</span>';
     });
 
-    renderGroup("group-opener", OPENERS, "opener", function (o) {
+    renderGroup("group-opener", L("opener"), "opener", function (o) {
       return '<span class="name">' + o.name + '</span>' +
              '<span class="desc">' + o.desc + '</span>' +
              '<span class="price mono">' + (o.price ? (o.from ? 'from +' : '+') + fmt(o.price) : 'included') + '</span>';
@@ -704,6 +797,7 @@
     Array.prototype.forEach.call(el.querySelectorAll("button.opt"), function (btn) {
       btn.addEventListener("click", function () {
         state[key] = btn.getAttribute("data-id");
+        normalize();
         render();
       });
     });
@@ -761,8 +855,8 @@
   }
 
   function renderDoor() {
-    var size = byId(SIZES, state.size);
-    var color = byId(COLORS, state.color);
+    var size = curSize();
+    var color = byId(L("color"), state.color);
     var scale = Math.min(26, 320 / size.h, 560 / size.w);
     var W = size.w * scale, H = size.h * scale;
     var doorX = (640 - W) / 2, doorY = 388 - H;
@@ -858,7 +952,7 @@
   }
 
   function renderCutaway() {
-    var ins = byId(INSULATION, state.insulation);
+    var ins = byId(L("insulation"), state.insulation);
     var svg = document.getElementById("cutawaySvg");
     var coreW = ins.id === "none" ? 4 : (ins.id === "vinyl" ? 20 : 30);
     var out = '<rect x="2" y="6" width="' + (coreW + 12) + '" height="46" fill="none"/>';
@@ -880,28 +974,30 @@
   }
 
   function renderSummary() {
-    var size = byId(SIZES, state.size);
-    var design = byId(DESIGN, state.design);
-    var ins = byId(INSULATION, state.insulation);
-    var win = byId(WINDOWS, state.windows);
-    var color = byId(COLORS, state.color);
-    var track = byId(TRACK, state.track);
-    var op = byId(OPENERS, state.opener);
+    var size = curSize();
+    var brand = byId(BRANDS, state.brand);
+    var design = byId(L("design"), state.design);
+    var ins = byId(L("insulation"), state.insulation);
+    var win = byId(L("windows"), state.windows);
+    var color = byId(L("color"), state.color);
+    var track = byId(L("track"), state.track);
+    var op = byId(L("opener"), state.opener);
 
     var lines = [
-      { label: size.dim + " door, installed (" + size.sub + ")", amt: size.price },
+      { label: brand.name + " " + size.dim + " door, installed (" + size.sub + ")", amt: size.price },
       { label: design.name + " design", amt: design.price, note: design.note },
-      { label: ins.id === "none" ? "Non-insulated construction" : ins.name + " insulation", amt: ins.price },
+      { label: (ins.model ? ins.model + " · " : "") + (ins.id === "none" ? "non-insulated construction" : ins.name + " insulation"), amt: ins.price },
       { label: win.id === "none" ? "No windows" : win.name + " windows", amt: win.price },
       { label: color.name + " finish", amt: color.price },
-      { label: track.name + " track", amt: track.price },
-      { label: op.id === "none" ? "No opener work" : "Opener installation", amt: op.price, from: op.from }
+      { label: track.name + " track", amt: track.price, note: track.note },
+      { label: op.id === "none" ? "No opener work" : (op.byH ? op.name + " opener, installed" : "Opener installation"), amt: op.price, from: op.from }
     ];
     var total = lines.reduce(function (s, l) { return s + l.amt; }, 0);
 
     document.getElementById("totalPrice").textContent = fmt(total);
     document.getElementById("insulLabel").textContent = ins.label;
 
+    document.getElementById("pick-brand").textContent = brand.name;
     document.getElementById("pick-size").textContent = size.dim;
     document.getElementById("pick-design").textContent = design.name;
     document.getElementById("pick-insulation").textContent = ins.name;
@@ -915,9 +1011,11 @@
       return '<div class="breakdown-row"><span>' + l.label + '</span><span class="amt mono">' + (l.note ? l.note : (l.amt ? (l.from ? "from +" : "+") + fmt(l.amt) : "included")) + '</span></div>';
     }).join("") +
       '<div class="breakdown-row"><span><strong>Estimated total, installed</strong></span><span class="amt mono">' + fmt(total) + '</span></div>' +
-      '<div class="breakdown-note">Every price here is <strong>installed</strong> — the door, track, springs, hardware, labor and haul-away of your old door are already included. Final price is confirmed on a free on-site measure: headroom, framing and spring type can change the quote. In-stock specials in the list below may beat this estimate.</div>';
+      (isA()
+        ? '<div class="breakdown-note">Amarr prices are <strong>installed</strong> — the door, track, springs, hardware and labor are included. Final price is confirmed on a free on-site measure. <a href="../brands/amarr/">See all Amarr models &amp; prices →</a></div>'
+        : '<div class="breakdown-note">Every price here is <strong>installed</strong> — the door, track, springs, hardware, labor and haul-away of your old door are already included. Final price is confirmed on a free on-site measure: headroom, framing and spring type can change the quote. In-stock specials in the list below may beat this estimate.</div>');
 
-    var msg = "Hi Viking Garage Door — I built a Garaga door on your site: " + size.dim + ", " + design.name + " design, " + ins.name + ", " + (win.id === "none" ? "no windows" : win.name + " windows") + ", " + color.name + ", " + track.name + " track, " + (op.id === "none" ? "no opener work" : "opener installation") + ". Estimated total installed " + fmt(total) + ". Can you confirm pricing and a time to measure?";
+    var msg = "Hi Viking Garage Door — I built a " + brand.name + " door on your site: " + size.dim + ", " + design.name + " design, " + ins.name + ", " + (win.id === "none" ? "no windows" : win.name + " windows") + ", " + color.name + ", " + track.name + " track, " + (op.id === "none" ? "no opener work" : op.name) + ". Estimated total installed " + fmt(total) + ". Can you confirm pricing and a time to measure?";
     document.getElementById("smsLink").href = "sms:+18649217373&body=" + encodeURIComponent(msg);
   }
 
@@ -935,6 +1033,7 @@
     else { wrap.setAttribute("hidden", ""); this.textContent = "show breakdown"; this.setAttribute("aria-expanded", "false"); }
   });
 
+  if (/[?&]brand=amarr(&|$)/.test(location.search)) { state.brand = "amarr"; normalize(); }
   render();
 })();
 </script>
